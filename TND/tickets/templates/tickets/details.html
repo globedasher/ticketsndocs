@@ -1,0 +1,8 @@
+<h1>{{ ticket.document_number }}</h1>
+
+{% if error_message %}<p><strong>{{ error_message}}</strong></p>{% endif %}
+
+<form action="{% url "tickets:details" ticket.id %}" method="post">
+{% csrf_token %}
+</form>
+

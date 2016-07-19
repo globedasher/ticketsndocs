@@ -1,0 +1,21 @@
+<p> Welcome to Tickets 'n Docs. </p>
+<p> This application will allow you to create tickets to fix issues with
+your processes. It is like a reminder system for technical systems. 
+Follow-up reminders will be sent via email to users assigned to tickets
+in the system. </p>
+
+<ul>
+    <a href="{% url "tickets:create" %}">Create a new ticket</a>
+</ul>
+
+{% if open_ticket_list %}
+  <ul>
+  {% for ticket in open_ticket_list %}
+  <li><a href="{% url "tickets:details" ticket.id %}">
+          {{ ticket.ticket_number }} {{ ticket.document_number }}</a></li>
+  {% endfor %}
+  </ul>
+{% else %}
+  <p>No tickets are available. Great work, team! Go home and give yourself a 
+  reward.</p>
+{% endif %}

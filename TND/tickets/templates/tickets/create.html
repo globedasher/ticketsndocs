@@ -1,0 +1,23 @@
+<! This create.html file is used to build the 'create tickets' form. >
+
+<p> This is the form for submitting tickets into the ticketing system
+of Tickets 'n Docs. This will allow you to submit tickets for all systems
+with relevent ticketing systems. Shall I ramble on some more? </p>
+
+<form action="{% url "tickets:create" %}" method="post">
+  {% csrf_token %}
+  <p>
+  Ticket Number:<input type="field" name="Ticket ID:" 
+                value="{{ ticket.ticket_number }}" />
+  </p>
+  <p>
+  Publish date:<input type="field" name="Ticket ID:" 
+                value="{{ ticket.pub_date }}" />
+  </p>
+  <p>
+  Document Number:<input type="field" name="Ticket ID:" 
+                value="{{ ticket.document_number }}" />
+  </p>
+  <input type="submit" value="Submit" />
+
+</form>

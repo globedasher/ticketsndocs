@@ -52,6 +52,10 @@ class Ticket(models.Model):
         return self.comments_for_revision
 
     def create(self):
+        """
+        Testing to see if I can create some dummy data that will appear on 
+        a view.
+        """
         self.ticket_number = 12 
         self.pub_date = timezone.now() 
         self.document_for_update = "this one"

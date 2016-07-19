@@ -11,3 +11,21 @@
 
                          I am going to get these files up on GitHub for
                          delsquaredb
+
+Hi Mike,
+
+I added this repository and it's private. Let's get cracking!
+
+to run the applicaiton, I suggest you install a virtualenvironment as 
+env in the root folder. From the main TND folder, you will need to run
+python manage.py runserver to run the testserver and view it with your
+web browser at 127.0.0.1:8000/tickets and /admin. I don't think you'll 
+need any other setup.
+
+To learn more about how this works, go through the "build your first
+Django app" eight part tutorial at the official Django page.
+
+Let me know if you have any questions.
+
+-Richard Morley
+

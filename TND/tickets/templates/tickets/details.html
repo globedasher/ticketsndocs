@@ -1,8 +1,39 @@
-<h1>{{ ticket.document_number }}</h1>
+<!DOCTYPE >
+<html>
+<body>
+<h3>Ticket # {{ ticket.id }}</h3>
 
-{% if error_message %}<p><strong>{{ error_message}}</strong></p>{% endif %}
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
 <form action="{% url "tickets:details" ticket.id %}" method="post">
 {% csrf_token %}
-</form>
 
+Publish Date:<br>
+<input type="datetime-local" value="{{ ticket.pub_date }}" /><br>
+Document Number:<br>
+<input type="number" value="{{ ticket.document_number }}" /><br>
+Comments for revision:<br>
+<textarea name="message" rows=6 cols=70> {{ ticket.comments_for_revision }}
+</textarea><br>
+Writer:<br>
+<input type="text" value="{{ ticket.writer }}" /><br>
+Writer email:<br>
+<input type="email" value="{{ ticket.writer_email }}" /><br>
+Editor:<br>
+<input type="text" value="{{ ticket.editor }}" /><br>
+Editor email:<br>
+<input type="email" value="{{ ticket.editor_email }}" /><br>
+Close date:<br>
+<input type="datetime-local" value="{{ ticket.close_date }}" /><br>
+Major revision:<br>
+<input type="text" value="{{ ticket.major_revision }}" /><br>
+Minor revision:<br>
+<input type="text" value="{{ ticket.minor_revision }}" /><br>
+
+
+</form>
+<! The item below is a link to return to the ticket index.>
+<a href="{% url "tickets:index" %}"> Return to Ticket Index </a>
+
+</body>
+</html>

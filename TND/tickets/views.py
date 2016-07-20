@@ -28,11 +28,32 @@ class TicketIndex(generic.ListView):
 
 
 class DetailsView(generic.DetailView):
+    """
+    Used for overview of the ticket status.
+    """
     model = Ticket
     template_name = "tickets/details.html"
 
+
 # This class view is intended to be used with the create_ticket function.
-class CreateTicket(generic.TemplateView):
+class TicketForm(generic.TemplateView):
+    """
+    Used to create the ticket and provide preliminiary information
+    """
     model = Ticket
-    model_name = "ticket"
-    template_name = "tickets/create.html"
+    template_name = "tickets/form.html"
+
+
+def create_ticket(request):
+    """
+    This method is used to create a ticket then display the details 
+    page for the associated ticket.
+   
+    """
+    Ticket.objects.create(id=Ticket.objects.count() + 1))
+    print(Ticket.id)
+    Ticket.save()
+    # Always return an HttpResponseRedirect after successfully dealing
+    # with POST data. This prevents data from being posted twice if a
+    # user hits the Back button.
+    return HttpResponseRedirect(reverse("tickets:create", args=(ticket.id,)))

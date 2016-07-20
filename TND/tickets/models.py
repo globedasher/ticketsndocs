@@ -1,3 +1,6 @@
+"""
+This is the models.py file for Tickets n' Docs. This is great! Get it on!
+"""
 import datetime
 
 
@@ -6,7 +9,6 @@ from django.utils import timezone
 
 
 # Create your models here.
-
 
 
 class Ticket(models.Model):
@@ -19,7 +21,6 @@ class Ticket(models.Model):
     to the writer until they agree it can be released.  
     """
 
-    ticket_number = models.IntegerField()
     pub_date = models.DateTimeField("Date published")
     document_number = models.CharField(max_length=8)
     comments_for_revision = models.CharField(max_length=400)
@@ -38,33 +39,4 @@ class Ticket(models.Model):
         """ 
         When requested, return the ticket number.
         """
-        ticket_items = """These items are created for a ticket: \n
-                       ticket_number = models.IntegerField() \n
-                       pub_date = models.DateTimeField("Date published") \n
-                       document_for_update = models.CharField(max_length=8) \n
-                       comments_for_revision = models.CharField(max_length=400) \n
-                       writer = models.CharField(max_length=50) \n
-                       writer_email = models.CharField(max_length=50) \n
-                       editor = models.CharField(max_length=50) \n
-                       editor_email = models.CharField(max_length=50) \n
-                       close_date = models.DateTimeField("Date closed")"""
-        #print(ticket_items)
-        return self.comments_for_revision
-
-    def create(self):
-        """
-        Testing to see if I can create some dummy data that will appear on 
-        a view.
-        """
-        self.ticket_number = 12 
-        self.pub_date = timezone.now() 
-        self.document_for_update = "this one"
-        self.comments_for_revision = "thitihtihtihtien"
-        self.writer = "Richard Morley"
-        self.writer_email = "Me"
-        self.editor = "Richard Morley" 
-        self.editor_email = "Me"
-        self.close_date = timezone.now()
-
-    #def needs_attention(self):
-        # This function will send out reminder emails every 14 days.
+        return self.document_number

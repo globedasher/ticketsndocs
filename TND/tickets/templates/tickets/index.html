@@ -1,18 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+}
+th {
+    text-align: left;
+}
+</style>
+</head>
+<body>
+
 <p> Welcome to Tickets 'n Docs. </p>
-<p> This application will allow you to create tickets to fix issues with
-your processes. It is like a reminder system for technical systems. 
-Follow-up reminders will be sent via email to users assigned to tickets
-in the system. </p>
+<p> This application will allow you to create tickets to fix issues.
+The system should be intuitive. </p>
 
 <ul>
-    <a href="{% url "tickets:create" %}">Create a new ticket</a>
+    <a href="{% url "tickets:form" %}">Create a new ticket</a>
 </ul>
+
+<! The following will create a table with the open tickets of the system
+listed for use. >
 
 {% if open_ticket_list %}
   <ul>
+  <table style="width:30%">
+
+      <tr>
+          <th>Ticket Number</th>
+          <th>Document Number</th>
+      </tr>
+
   {% for ticket in open_ticket_list %}
-  <li><a href="{% url "tickets:details" ticket.id %}">
-          {{ ticket.ticket_number }} {{ ticket.document_number }}</a></li>
+
+      <tr>
+          <td> <a href="{% url "tickets:details" ticket.id %}">
+                  {{ ticket.id }}</a></td>
+          <td><a href="{% url "tickets:details" ticket.id %}">
+                  {{ ticket.document_number }}</a></td>
+      </tr>
+
   {% endfor %}
   </ul>
 {% else %}

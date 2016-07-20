@@ -40,20 +40,20 @@ class TicketForm(generic.TemplateView):
     """
     Used to create the ticket and provide preliminiary information
     """
+    new_ticket_id = Ticket.objects.count() + 1
     model = Ticket
     template_name = "tickets/form.html"
 
 
-def create_ticket(request):
+def create_ticket(request, Ticket):
     """
     This method is used to create a ticket then display the details 
     page for the associated ticket.
    
     """
-    Ticket.objects.create(id=Ticket.objects.count() + 1))
-    print(Ticket.id)
+    model = Ticket
     Ticket.save()
     # Always return an HttpResponseRedirect after successfully dealing
     # with POST data. This prevents data from being posted twice if a
     # user hits the Back button.
-    return HttpResponseRedirect(reverse("tickets:create", args=(ticket.id,)))
+    return HttpResponseRedirect(reverse("tickets:details", args=(ticket.id,)))

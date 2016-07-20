@@ -20,7 +20,6 @@ class Ticket(models.Model):
     review the documentation. The editor will markup changes and pass it back
     to the writer until they agree it can be released.  
     """
-
     pub_date = models.DateTimeField("Date published")
     document_number = models.CharField(max_length=8)
     comments_for_revision = models.CharField(max_length=400)

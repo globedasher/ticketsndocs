@@ -36,13 +36,13 @@ class DetailsView(generic.DetailView):
 
 
 # This class view is intended to be used with the create_ticket function.
-class TicketForm(generic.TemplateView):
+class InitialForm(generic.TemplateView):
     """
     Used to create the ticket and provide preliminiary information
     """
-    new_ticket_id = Ticket.objects.count() + 1
     model = Ticket
-    template_name = "tickets/form.html"
+    context_object_name = "open_ticket_list"
+    template_name = "tickets/initial.html"
 
 
 def create_ticket(request, Ticket):

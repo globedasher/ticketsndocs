@@ -26,7 +26,7 @@ class Ticket(models.Model):
     writer = models.CharField(max_length=50)
     writer_email = models.CharField(max_length=50)
     editor = models.CharField(max_length=50)
-    editor_email = models.CharField(max_length=50)
+    editor_email = models.EmailField(max_length=50)
     close_date = models.DateTimeField("Date closed")
     # major_revision will only be incremented when a release is posted. It will
     # remain a zero until that point. (0.1, 0.2,... 1.0)

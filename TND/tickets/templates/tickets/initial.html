@@ -1,12 +1,24 @@
-<!DOCTYPE >
+<!DOCTYPE html>
 <html>
 <body>
-<h3>Ticket # {{ ticket.id }}</h3>
+<h3>Ticket # {{ ticket_id }}</h3>
 
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-<form action="{% url "tickets:details" ticket.id %}" method="post">
+
+<! This initial.html file is used to build the 'create tickets' form. >
+<! I do not want to give a ticket number to a ticket before it is created
+   but I believe I am going to have to do so for breviety. >
+
+<p> This is the form for submitting tickets into Tickets 'n Docs. </p>
+
+<form action="{% url "tickets:create"  %}" method="post">
 {% csrf_token %}
+<label for="ticket">ticket: </label>
+<input id="ticket" type="text" name="ticket" value="{{document_number}}">
+<input type="submit" value="Submit">
+</form>
+
+<form action="{% url "tickets:create"  %}" method="post">
 
 Publish Date:<br>
 <input type="datetime-local" value="{{ ticket.pub_date }}" /><br>
@@ -30,11 +42,10 @@ Major revision:<br>
 Minor revision:<br>
 <input type="text" value="{{ ticket.minor_revision }}" /><br>
 
-
- <input type="submit" value="Submit Ticket"  /><br>
-
+<input type="submit" value="Submit Ticket"  /><br>
 </form>
-<! The item below is a link to return to the ticket index.>
+
+
 <a href="{% url "tickets:index" %}"> Return to Ticket Index </a>
 
 </body>

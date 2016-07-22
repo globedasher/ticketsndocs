@@ -24,7 +24,7 @@ app_name = "tickets"
 urlpatterns = [
     url(r'^$', views.TicketIndex.as_view(), name='index'),
     url(r'^(?P<pk>[0-9]+)/$', views.DetailsView.as_view(), name='details'),
-    url(r'^form/$', views.TicketForm.as_view(), name='form'),
+    url(r'^initial/$', views.InitialForm.as_view(), name='initial'),
     url(r'^create/$', views.create_ticket, name='create'),
     #url(r'^admin/', admin.site.urls),
     ]

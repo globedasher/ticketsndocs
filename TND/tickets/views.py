@@ -11,11 +11,14 @@ from django.views import generic
 from django.utils import timezone
 
 from .models import Ticket
+from .form import DetailForm
 
 
 # Create your views here.
 
 
+# This class view shows all the tickets that are currently open and provides
+# a portal to create more tickets.
 class TicketIndex(generic.ListView):
     template_name = "tickets/index.html"
     context_object_name = "open_ticket_list"
@@ -27,6 +30,8 @@ class TicketIndex(generic.ListView):
         return Ticket.objects.order_by('pub_date')
 
 
+# This class view shows the details of a pre-existing ticket in an editable
+# format.
 class DetailsView(generic.DetailView):
     """
     Used for overview of the ticket status.
@@ -35,25 +40,41 @@ class DetailsView(generic.DetailView):
     template_name = "tickets/details.html"
 
 
-# This class view is intended to be used with the create_ticket function.
-class InitialForm(generic.TemplateView):
-    """
-    Used to create the ticket and provide preliminiary information
-    """
-    model = Ticket
-    context_object_name = "open_ticket_list"
-    template_name = "tickets/initial.html"
+# This function is supposed to save changes to a ticket from the Details
+# view. I changed the function name to keep for debugging against methods 
+# called save().
+def keep(request, ticket_id):
+    print(request)
+    print(ticket_id)
+    ticket = get_object_or_404(Ticket, pk=ticket_id)
+    #try:
+    updated_info = ticket.objects.get(pk=request.POST["document_number"])
+    #except(KeyError, ticket.DoesNotExist):
+        # Redisplay the details page if there is an error
+        #return render(request, 'tickets/details.html', {
+            #'ticket':ticket,
+            #'error_message': "Something didn't work",
+            #})
+    #else:
+    updated_info.save()
+    return HttpResponseRedirect(reverse(
+                                    "tickets:index", args=(ticket.id,)))
 
 
-def create_ticket(request, Ticket):
-    """
-    This method is used to create a ticket then display the details 
-    page for the associated ticket.
-   
-    """
-    model = Ticket
-    Ticket.save()
-    # Always return an HttpResponseRedirect after successfully dealing
-    # with POST data. This prevents data from being posted twice if a
-    # user hits the Back button.
-    return HttpResponseRedirect(reverse("tickets:details", args=(ticket.id,)))
+
+def get_name(request, ticket_id=None):
+    # If this is a POST  request, we need to process the form data.
+    if request.method == "POST":
+        # Create a form instance and populate it with data from the request
+        ticket = get_object_or_404(Ticket, pk=ticket_id)
+        # Check if it's valid.
+        #if ticket.is_valid():
+            # Um... They said something about form.cleaned_data as required
+            # I don't know what that means.
+            # Redirect to new URL
+        return HttpResponseRedirect(reverse("tickets:index"))
+        # If GET or other method, present blank form
+        #else:
+            #ticket = DetailsView()
+
+        #return render(request, "details.html", {"ticket":ticket})

@@ -1,0 +1,17 @@
+<!DOCTYPE >
+<html>
+<body>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url "tickets:get_name" ticket.id %}" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Update Ticket"  /><br>
+
+</form>
+<! The item below is a link to return to the ticket index.>
+<a href="{% url "tickets:index" %}"> Return to Ticket Index </a>
+
+</body>
+</html>

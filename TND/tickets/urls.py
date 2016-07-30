@@ -17,14 +17,15 @@ from django.conf.urls import url, include
 from django.contrib import admin
 
 from . import views
+from . import form
 
 # The following app_name provides a name to reference in the namespace...
 # or something. I'm still learning Django.
 app_name = "tickets"
 urlpatterns = [
     url(r'^$', views.TicketIndex.as_view(), name='index'),
-    url(r'^(?P<pk>[0-9]+)/$', views.DetailsView.as_view(), name='details'),
-    url(r'^initial/$', views.InitialForm.as_view(), name='initial'),
-    url(r'^create/$', views.create_ticket, name='create'),
-    #url(r'^admin/', admin.site.urls),
-    ]
+    url(r'^(?P<pk>[0-9]+)/details/$', views.DetailsView.as_view(), 
+        name='details'),
+    url(r'form/$', form.DetailForm, name='form'),
+    url(r'^(?P<ticket_id>[0-9]+)/get_name/$', views.get_name, name='get_name'),
+            ]

@@ -5,11 +5,13 @@
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-<form action="{% url "tickets:details" ticket.id %}" method="post">
+<form action="{% url "tickets:get_name" ticket.id %}" method="post">
 {% csrf_token %}
+{{ ticket }}
 
 Publish Date:<br>
-<input type="datetime-local" value="{{ ticket.pub_date }}" /><br>
+<input id="pub_date" type="datetime-local" 
+name="pub_date" value="{{ ticket.pub_date }}" /><br>
 Document Number:<br>
 <input type="number" value="{{ ticket.document_number }}" /><br>
 Comments for revision:<br>
@@ -18,11 +20,11 @@ Comments for revision:<br>
 Writer:<br>
 <input type="text" value="{{ ticket.writer }}" /><br>
 Writer email:<br>
-<input type="email" value="{{ ticket.writer_email }}" /><br>
+<input type="text" value="{{ ticket.writer_email }}" /><br>
 Editor:<br>
 <input type="text" value="{{ ticket.editor }}" /><br>
 Editor email:<br>
-<input type="email" value="{{ ticket.editor_email }}" /><br>
+<input type="text" value="{{ ticket.editor_email }}" /><br>
 Close date:<br>
 <input type="datetime-local" value="{{ ticket.close_date }}" /><br>
 Major revision:<br>
@@ -31,7 +33,7 @@ Minor revision:<br>
 <input type="text" value="{{ ticket.minor_revision }}" /><br>
 
 
- <input type="submit" value="Submit Ticket"  /><br>
+ <input type="submit" value="Update Ticket"  /><br>
 
 </form>
 <! The item below is a link to return to the ticket index.>

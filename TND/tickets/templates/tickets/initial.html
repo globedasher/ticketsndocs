@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <body>
-<h3>Ticket # {{ ticket_id }}</h3>
+<h3>Ticket # {{ ticket.id }}</h3>
 
 
 
@@ -11,14 +11,14 @@
 
 <p> This is the form for submitting tickets into Tickets 'n Docs. </p>
 
-<form action="{% url "tickets:create"  %}" method="post">
+<form action="{% url "tickets:create" %}" method="post">
 {% csrf_token %}
 <label for="ticket">ticket: </label>
 <input id="ticket" type="text" name="ticket" value="{{document_number}}">
 <input type="submit" value="Submit">
 </form>
 
-<form action="{% url "tickets:create"  %}" method="post">
+<form action="{% url "tickets:create" %}" method="post">
 
 Publish Date:<br>
 <input type="datetime-local" value="{{ ticket.pub_date }}" /><br>

@@ -64,6 +64,7 @@ def keep(request, ticket_id):
 
 def get_name(request, ticket_id=None):
     # If this is a POST  request, we need to process the form data.
+    print(request)
     if request.method == "POST":
         # Create a form instance and populate it with data from the request
         ticket = get_object_or_404(Ticket, pk=ticket_id)

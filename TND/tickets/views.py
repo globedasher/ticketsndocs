@@ -27,7 +27,7 @@ class TicketIndex(generic.ListView):
         """
         Return all the tickets.
         """
-        return Ticket.objects.order_by('pub_date')
+        return Ticket.objects.order_by('id') 
 
 
 # This class view shows the details of a pre-existing ticket in an editable
@@ -40,42 +40,72 @@ class DetailsView(generic.DetailView):
     template_name = "tickets/details.html"
 
 
-# This function is supposed to save changes to a ticket from the Details
-# view. I changed the function name to keep for debugging against methods 
-# called save().
-def keep(request, ticket_id):
-    print(request)
-    print(ticket_id)
-    ticket = get_object_or_404(Ticket, pk=ticket_id)
-    #try:
-    updated_info = ticket.objects.get(pk=request.POST["document_number"])
-    #except(KeyError, ticket.DoesNotExist):
-        # Redisplay the details page if there is an error
-        #return render(request, 'tickets/details.html', {
-            #'ticket':ticket,
-            #'error_message': "Something didn't work",
-            #})
-    #else:
-    updated_info.save()
-    return HttpResponseRedirect(reverse(
-                                    "tickets:index", args=(ticket.id,)))
+def create_ticket(request):
+    # This function is used to display a blank form for data input and to
+    # accept post data from the blank form.
+    # If a POST reqest, we need to process the form data
+    if request.method == 'POST':
+        # Create a new form instance and populate it with data from the request
+        form = DetailForm(request.POST)
+        # Check if the data is valid
+        if form.is_valid():
+            # Process the cleaned data and place it in the ticket elements then
+            # save it to the database. 
+            tick = Ticket(form.cleaned_data['pub_date'], 
+                          form.cleaned_data['document_number'],
+                          form.cleaned_data['comments_for_revision'],
+                          form.cleaned_data['writer'], 
+                          form.cleaned_data['writer_email'],
+                          form.cleaned_data['editor'],
+                          form.cleaned_data['editor_email'],
+                          form.cleaned_data['major_revision'],
+                          form.cleaned_data['minor_revision'],
+                          )
+            print(tick.pk)
+            tick.save()
+            print(tick.pk)
+            # Redirect to a new URL
+            return HttpResponseRedirect('/tickets/thanks/')
 
+    # If GET or any other method, present a blank form.
+    else:
+        form = DetailForm()
 
+    return render(request, 'tickets/newForm.html', {'form':form})
 
-def get_name(request, ticket_id=None):
-    # If this is a POST  request, we need to process the form data.
-    print(request)
-    if request.method == "POST":
-        # Create a form instance and populate it with data from the request
-        ticket = get_object_or_404(Ticket, pk=ticket_id)
-        # Check if it's valid.
-        #if ticket.is_valid():
-            # Um... They said something about form.cleaned_data as required
-            # I don't know what that means.
-            # Redirect to new URL
-        return HttpResponseRedirect(reverse("tickets:index"))
-        # If GET or other method, present blank form
-        #else:
-            #ticket = DetailsView()
+def open_ticket(request, pk):
+    # This function is used to render a bound form with existing data.
+    if request.method == 'POST':
+        # Create a new form instance and populate it with data from the request
+        form = DetailForm(request.POST)
+        # Check if the data is valid
+        if form.is_valid():
+            tick = Ticket(form.cleaned_data['pub_date'], 
+                          form.cleaned_data['document_number'],
+                          form.cleaned_data['comments_for_revision'],
+                          form.cleaned_data['writer'], 
+                          form.cleaned_data['writer_email'],
+                          form.cleaned_data['editor'],
+                          form.cleaned_data['editor_email'],
+                          form.cleaned_data['major_revision'],
+                          form.cleaned_data['minor_revision'],
+                          )
+            print(tick)
+            tick.save()
+            # Process the data in form.clean_data
+            #
+            # Redirect to a new URL
+            return HttpResponseRedirect('/tickets/thanks/')
 
-        #return render(request, "details.html", {"ticket":ticket})
+    # If GET or any other method, present a blank form.
+    else:
+        ticket = Ticket.objects.get(pk=pk)
+        form = DetailForm(instance=ticket)
+
+    return render(request, 'tickets/form.html', {'form':form})
+
+def thanks(request):
+    """
+    Used to thank the user for inputting a ticket.
+    """
+    return render(request, 'tickets/thanks.html')

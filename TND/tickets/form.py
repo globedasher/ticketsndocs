@@ -10,6 +10,7 @@ from django.core.urlresolvers import reverse
 from django.views import generic
 from django.utils import timezone
 from django import forms
+from django.forms import ModelForm
 
 from .models import Ticket
 
@@ -19,5 +20,16 @@ from .models import Ticket
 
 # This class view shows all the tickets that are currently open and provides
 # a portal to create more tickets.
-class DetailForm(forms.Form):
-    your_name = forms.CharField(label="Your name:", max_length=100)
+class DetailForm(ModelForm):
+    class Meta:
+        model = Ticket
+        fields = ['pub_date', 
+                  'document_number', 
+                  'comments_for_revision',
+                  'writer', 
+                  'writer_email', 
+                  'editor', 
+                  'editor_email', 
+                  'major_revision', 
+                  'minor_revision'
+                  ]

@@ -6,26 +6,36 @@ Examples:
 Function views
     1. Add an import:  from my_app import views
     2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.conf.urls import url, include
-    2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include
 from django.contrib import admin
 
 from . import views
-from . import form
 
 # The following app_name provides a name to reference in the namespace...
 # or something. I'm still learning Django.
 app_name = "tickets"
 urlpatterns = [
+    # URL for the index of existing tickets
     url(r'^$', views.TicketIndex.as_view(), name='index'),
+
+    # URL for a blank, new ticket
+    url(r'newForm/$', views.create_ticket, name='newForm'),
+
+    # Post a new ticket to the database 
+    url(r'create_ticket/', views.create_ticket, name='create_ticket'),
+
+    # Display the details of an existing ticket
+    url(r'^(?P<pk>[0-9]+)/form/$', views.open_ticket, 
+        name='form'),
+    
+    # Display the details of an existing ticket
     url(r'^(?P<pk>[0-9]+)/details/$', views.DetailsView.as_view(), 
         name='details'),
-    url(r'form/$', form.DetailForm, name='form'),
-    url(r'^(?P<ticket_id>[0-9]+)/get_name/$', views.get_name, name='get_name'),
+
+
+    # This URL will redirect users to a thank you page after submitting a
+    # ticket or updating a ticket
+    url(r'thanks/$', views.thanks, name='thanks'),
+
             ]

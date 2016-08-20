@@ -21,14 +21,14 @@ th {
 The system should be intuitive. </p>
 
 <ul>
-    <a href="{% url "tickets:form" %}"> Create new ticket.</a>
+    <a href="{% url "tickets:newForm" %}"> Create new ticket.</a>
 </ul>
 
 <! The following will create a table with the open tickets of the system
 listed for use. >
 
 {% if open_ticket_list %}
-  <ul>
+  <ul> 
   <table style="width:30%">
 
       <tr>
@@ -36,17 +36,19 @@ listed for use. >
           <th>Document Number</th>
       </tr>
 
+  <ul>
   {% for ticket in open_ticket_list %}
 
       <tr>
-          <td> <a href="{% url "tickets:details" ticket.id %}">
+          <td> <a href="{% url "tickets:form" ticket.id %}">
                   {{ ticket.id }}</a></td>
-          <td><a href="{% url "tickets:details" ticket.id %}">
+          <td><a href="{% url "tickets:form" ticket.id %}">
                   {{ ticket.document_number }}</a></td>
       </tr>
 
   {% endfor %}
   </ul>
+
 {% else %}
   <p>No tickets are available. Great work, team! Go home and give yourself a 
   reward.</p>

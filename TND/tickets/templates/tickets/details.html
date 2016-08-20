@@ -5,9 +5,8 @@
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-<form action="{% url "tickets:get_name" ticket.id %}" method="post">
-{% csrf_token %}
-{{ ticket }}
+<form action="{% url "tickets:details" ticket.id %}" method="post">
+  {% csrf_token %}
 
 Publish Date:<br>
 <input id="pub_date" type="datetime-local" 
@@ -17,8 +16,12 @@ Document Number:<br>
 Comments for revision:<br>
 <textarea name="message" rows=6 cols=70> {{ ticket.comments_for_revision }}
 </textarea><br>
+
+
 Writer:<br>
-<input type="text" value="{{ ticket.writer }}" /><br>
+<input type="text" name="writer" value="{{ ticket.writer }}" /><br>
+
+
 Writer email:<br>
 <input type="text" value="{{ ticket.writer_email }}" /><br>
 Editor:<br>

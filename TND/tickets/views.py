@@ -67,7 +67,7 @@ def create_ticket(request):
             # Redirect to a new URL
             return HttpResponseRedirect('/tickets/thanks/')
 
-    # If GET or any other method, present a blank form.
+    # If GET or any other method, present the blank form.
     else:
         form = DetailForm()
 
@@ -76,10 +76,11 @@ def create_ticket(request):
 def open_ticket(request, pk):
     # This function is used to render a bound form with existing data.
     if request.method == 'POST':
-        # Create a new form instance and populate it with data from the request
+        # The following code will save altered data to an existing ticket.
         form = DetailForm(request.POST)
         # Check if the data is valid
         if form.is_valid():
+            # Process the data in form.clean_data
             tick = Ticket(form.cleaned_data['pub_date'], 
                           form.cleaned_data['document_number'],
                           form.cleaned_data['comments_for_revision'],
@@ -92,12 +93,12 @@ def open_ticket(request, pk):
                           )
             print(tick)
             tick.save()
-            # Process the data in form.clean_data
-            #
-            # Redirect to a new URL
+            # Redirect to a 'thanks' URL to inform the user the input has been
+            # received.
             return HttpResponseRedirect('/tickets/thanks/')
 
-    # If GET or any other method, present a blank form.
+    # If GET or any other method, present a form with data from an exiting
+    # ticket. 
     else:
         ticket = Ticket.objects.get(pk=pk)
         form = DetailForm(instance=ticket)

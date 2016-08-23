@@ -1,13 +1,14 @@
-2016.07.13 globedasher - I am going back through the Django tutorial with the
-                         aim of creating a Tickets 'n Docs application to 
-                         sell.
-                         I am currently on the API section of part 2 of the 
-                         Djano tutorial.
+Tickets 'n Docs is has been built by Richard Morley.
+The beginning portion is the ticket application. This is simply a help desk
+ticketing system that is available for free and the UI will be presented
+through a web browser. The ticketing system can be used for any purpose; IT,
+Website Updates, Facilities Maintenance, Technical Support, Software Updates,
+Hardware Issues, etc. 
 
-2016.07.18 globedasher - I am building some pages that aren't quite working
-                         yet. I have more to learn about commenting in the 
-                         documents. Expecially now I am having to move into 
-                         HTML code as well...
+The document tracking system has not yet been been created, but the vision is 
+create a system that will allow any file to be uploaded to the server. The file
+will be stored with a time/date stamp and cannot be overwritten or deleted. 
+This will allow for tracking of documents organization wide and prevent loss of
+any crucial data.
 
-                         I am going to get these files up on GitHub for
-                         delsquaredb
+This system is written in Python 3.5 using Django 1.9 for the web framework.

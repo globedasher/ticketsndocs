@@ -36,7 +36,8 @@ class NewForm(ModelForm):
 class DetailForm(ModelForm):
     class Meta:
         model = Ticket
-        fields = ['pub_date', 
+        fields = ['id',
+                  'pub_date', 
                   'document_number', 
                   'comments_for_revision',
                   'reported_by', 

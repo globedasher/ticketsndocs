@@ -11,8 +11,8 @@ from django.views import generic
 from django.utils import timezone
 
 from .models import Ticket
-from .form import DetailForm
 from .form import NewForm
+from .form import DetailForm
 
 
 # Create your views here.
@@ -73,28 +73,16 @@ def create_ticket(request):
     return render(request, 'tickets/newForm.html', {'form':form})
 
 def open_ticket(request, pk):
-    # This function is used to render a bound form with existing data, but
-    # currently it is only a copy of the POST function for creating a ticket
-    # and not a POST function for updated ticket information. 
-    # TODO: make this function update an existing ticket.
+    # This function is used to render a bound form with existing data to update
+    # an existing ticket. 
     if request.method == 'POST':
         # The following code will save altered data to an existing ticket.
         form = DetailForm(request.POST)
         # Check if the data is valid
         if form.is_valid():
             # Process the data in form.clean_data
-            tick = Ticket(pub_date = form.cleaned_data['pub_date'], 
-                          document_number = form.cleaned_data['document_number'],
-                          comments_for_revision = form.cleaned_data['comments_for_revision'],
-                          reported_by = form.cleaned_data['reported_by'], 
-                          reported_by_email = form.cleaned_data['reported_by_email'],
-                          editor = form.cleaned_data['editor'],
-                          editor_email = form.cleaned_data['editor_email'],
-                          major_revision = form.cleaned_data['major_revision'],
-                          minor_revision = form.cleaned_data['minor_revision'],
-                          )
-            print(tick)
-            print(tick.id)
+            target = Ticket.objects.get(pk=pk)
+            tick = DetailForm(request.POST, instance=target)
             tick.save()
             # Redirect to a 'thanks' URL to inform the user the input has been
             # received.
@@ -105,7 +93,10 @@ def open_ticket(request, pk):
     else:
         ticket = Ticket.objects.get(pk=pk)
         form = DetailForm(instance=ticket)
-
+    
+    # TODO: Get the ticket.id to be passed to the template when it is rendered.
+    # The lack of this number being passed to the template is preventing the
+    # POST functions above from saving the updated data back to the datbase.
     return render(request, 'tickets/form.html', {'form':form})
 
 def thanks(request):

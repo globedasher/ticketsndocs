@@ -5,9 +5,9 @@
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
 
-<h3>Ticket # {{ ticket.id }}</h3>
+<h3>Ticket # {{ form.id }}</h3>
 
-<form action="{% url "tickets:update" ticket.id %}" method="post">
+<form action="{% url "tickets:update" form.id %}" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Update Ticket"  /><br>

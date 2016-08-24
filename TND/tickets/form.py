@@ -17,6 +17,19 @@ from .models import Ticket
 
 # Create your forms here.
 
+# This class view shows all the tickets that are currently open and provides
+# a portal to create more tickets.
+class NewForm(ModelForm):
+    class Meta:
+        model = Ticket
+        fields = ['pub_date', 
+                  'document_number', 
+                  'comments_for_revision',
+                  'reported_by', 
+                  'reported_by_email', 
+                  'major_revision', 
+                  'minor_revision'
+                  ]
 
 # This class view shows all the tickets that are currently open and provides
 # a portal to create more tickets.
@@ -26,8 +39,8 @@ class DetailForm(ModelForm):
         fields = ['pub_date', 
                   'document_number', 
                   'comments_for_revision',
-                  'writer', 
-                  'writer_email', 
+                  'reported_by', 
+                  'reported_by_email', 
                   'editor', 
                   'editor_email', 
                   'major_revision', 

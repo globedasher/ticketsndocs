@@ -19,15 +19,17 @@ urlpatterns = [
     # URL for the index of existing tickets
     url(r'^$', views.TicketIndex.as_view(), name='index'),
 
-    # URL for a blank, new ticket
+    # URL for a blank form for a new ticket
     url(r'newForm/$', views.create_ticket, name='newForm'),
 
-    # Post a new ticket to the database 
+    # Post the new ticket to the database 
     url(r'create_ticket/', views.create_ticket, name='create_ticket'),
 
     # Display the details of an existing ticket
-    url(r'^(?P<pk>[0-9]+)/form/$', views.open_ticket, 
-        name='form'),
+    url(r'^(?P<pk>[0-9]+)/form/$', views.open_ticket, name='form'),
+
+    # Post updated data from an existing ticket
+    url(r'^(?P<pk>[0-9]+)/update/$', views.open_ticket, name='update'),
     
     # Display the details of an existing ticket
     url(r'^(?P<pk>[0-9]+)/details/$', views.DetailsView.as_view(), 

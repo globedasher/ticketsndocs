@@ -12,6 +12,7 @@ from django.utils import timezone
 
 from .models import Ticket
 from .form import DetailForm
+from .form import NewForm
 
 
 # Create your views here.
@@ -46,52 +47,54 @@ def create_ticket(request):
     # If a POST reqest, we need to process the form data
     if request.method == 'POST':
         # Create a new form instance and populate it with data from the request
-        form = DetailForm(request.POST)
+        form = NewForm(request.POST)
         # Check if the data is valid
         if form.is_valid():
             # Process the cleaned data and place it in the ticket elements then
-            # save it to the database. 
-            tick = Ticket(form.cleaned_data['pub_date'], 
-                          form.cleaned_data['document_number'],
-                          form.cleaned_data['comments_for_revision'],
-                          form.cleaned_data['writer'], 
-                          form.cleaned_data['writer_email'],
-                          form.cleaned_data['editor'],
-                          form.cleaned_data['editor_email'],
-                          form.cleaned_data['major_revision'],
-                          form.cleaned_data['minor_revision'],
+            # save it to the database. In this instance, the cleaned_data is a
+            # dictionary from the form object. Each key presents the data
+            # obtained from the form.
+            tick = Ticket(pub_date = form.cleaned_data['pub_date'], 
+                          document_number = form.cleaned_data['document_number'],
+                          comments_for_revision = form.cleaned_data['comments_for_revision'],
+                          reported_by = form.cleaned_data['reported_by'], 
+                          reported_by_email = form.cleaned_data['reported_by_email'],
+                          major_revision = form.cleaned_data['major_revision'],
+                          minor_revision = form.cleaned_data['minor_revision'],
                           )
-            print(tick.pk)
             tick.save()
-            print(tick.pk)
             # Redirect to a new URL
             return HttpResponseRedirect('/tickets/thanks/')
 
     # If GET or any other method, present the blank form.
     else:
-        form = DetailForm()
+        form = NewForm()
 
     return render(request, 'tickets/newForm.html', {'form':form})
 
 def open_ticket(request, pk):
-    # This function is used to render a bound form with existing data.
+    # This function is used to render a bound form with existing data, but
+    # currently it is only a copy of the POST function for creating a ticket
+    # and not a POST function for updated ticket information. 
+    # TODO: make this function update an existing ticket.
     if request.method == 'POST':
         # The following code will save altered data to an existing ticket.
         form = DetailForm(request.POST)
         # Check if the data is valid
         if form.is_valid():
             # Process the data in form.clean_data
-            tick = Ticket(form.cleaned_data['pub_date'], 
-                          form.cleaned_data['document_number'],
-                          form.cleaned_data['comments_for_revision'],
-                          form.cleaned_data['writer'], 
-                          form.cleaned_data['writer_email'],
-                          form.cleaned_data['editor'],
-                          form.cleaned_data['editor_email'],
-                          form.cleaned_data['major_revision'],
-                          form.cleaned_data['minor_revision'],
+            tick = Ticket(pub_date = form.cleaned_data['pub_date'], 
+                          document_number = form.cleaned_data['document_number'],
+                          comments_for_revision = form.cleaned_data['comments_for_revision'],
+                          reported_by = form.cleaned_data['reported_by'], 
+                          reported_by_email = form.cleaned_data['reported_by_email'],
+                          editor = form.cleaned_data['editor'],
+                          editor_email = form.cleaned_data['editor_email'],
+                          major_revision = form.cleaned_data['major_revision'],
+                          minor_revision = form.cleaned_data['minor_revision'],
                           )
             print(tick)
+            print(tick.id)
             tick.save()
             # Redirect to a 'thanks' URL to inform the user the input has been
             # received.

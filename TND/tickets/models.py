@@ -3,7 +3,7 @@ This is the models.py file for Tickets n' Docs. This is great! Get it on!
 """
 import datetime
 
-
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils import timezone
 

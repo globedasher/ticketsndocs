@@ -25,16 +25,11 @@ urlpatterns = [
     # Post the new ticket to the database 
     url(r'create_ticket/', views.create_ticket, name='create_ticket'),
 
-    # Display the details of an existing ticket
+    # Display the details of an existing ticket with bound data
     url(r'^(?P<pk>[0-9]+)/form/$', views.open_ticket, name='form'),
 
     # Post updated data from an existing ticket
     url(r'^(?P<pk>[0-9]+)/update/$', views.open_ticket, name='update'),
-    
-    # Display the details of an existing ticket
-    url(r'^(?P<pk>[0-9]+)/details/$', views.DetailsView.as_view(), 
-        name='details'),
-
 
     # This URL will redirect users to a thank you page after submitting a
     # ticket or updating a ticket

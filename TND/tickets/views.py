@@ -31,16 +31,6 @@ class TicketIndex(generic.ListView):
         return Ticket.objects.order_by('id') 
 
 
-# This class view shows the details of a pre-existing ticket in an editable
-# format.
-class DetailsView(generic.DetailView):
-    """
-    Used for overview of the ticket status.
-    """
-    model = Ticket
-    template_name = "tickets/details.html"
-
-
 def create_ticket(request):
     # This function is used to display a blank form for data input and to
     # accept post data from the blank form.
@@ -93,11 +83,9 @@ def open_ticket(request, pk):
     else:
         ticket = Ticket.objects.get(pk=pk)
         form = DetailForm(instance=ticket)
-    
-    # TODO: Get the ticket.id to be passed to the template when it is rendered.
-    # The lack of this number being passed to the template is preventing the
-    # POST functions above from saving the updated data back to the datbase.
-    return render(request, 'tickets/form.html', {'form':form})
+        context = {'form':form, 'ticket':ticket}
+    # The following renders the form with the above contextual data.
+    return render(request, 'tickets/form.html', context)
 
 def thanks(request):
     """

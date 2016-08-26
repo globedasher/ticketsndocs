@@ -28,7 +28,12 @@ class TicketIndex(generic.ListView):
         """
         Return all the tickets.
         """
-        return Ticket.objects.order_by('id') 
+        # The following get the ticket objects from the database that exist but
+        # do not have a close date to populate the currently open ticket list.
+        # This list is then ordered by id number.
+        open_tickets = Ticket.objects.filter(close_date__isnull=True)
+        context = open_tickets.order_by('id')
+        return context
 
 
 def create_ticket(request):
@@ -84,9 +89,15 @@ def open_ticket(request, pk):
         ticket = Ticket.objects.get(pk=pk)
         form = DetailForm(instance=ticket)
         context = {'form':form, 'ticket':ticket}
+
     # The following renders the form with the above contextual data.
+    #
+    # TODO: 
+    # form.is_valid() function on line 76 is
+    # coming back False since the close_date and other fields are required.
     return render(request, 'tickets/form.html', context)
 
+# The folling definition displays a thank you page
 def thanks(request):
     """
     Used to thank the user for inputting a ticket.

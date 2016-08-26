@@ -20,23 +20,24 @@ class Ticket(models.Model):
     review the documentation. The editor will markup changes and pass it back
     to the writer until they agree it can be released.  
     """
-    pub_date = models.CharField(max_length=100,
-                                    default=timezone.now())
+    pub_date = models.DateField(max_length=100)
+                                    #default=timezone.now())
     document_number = models.CharField(max_length=30)
-    comments_for_revision = models.CharField(max_length=400)
+    comments_for_revision = models.CharField(max_length=500)
     reported_by = models.CharField(max_length=50)
-    reported_by_email = models.CharField(max_length=50)
+    reported_by_email = models.EmailField(max_length=50)
     editor = models.CharField(max_length=50)
-    editor_email = models.CharField(max_length=50)
-    #close_date = models.CharField(max_length=20)
+    editor_email = models.EmailField(max_length=50)
     # major_revision will only be incremented when a release is posted. It will
     # remain a zero until that point. (0.1, 0.2,... 1.0)
     major_revision = models.CharField(max_length=2)
     # minor_revision will be incremented with each file commit.
     minor_revision = models.CharField(max_length=2)
+    confirmed = models.BooleanField(default=False, blank=True)
+    close_date = models.DateField(max_length=100, null=True, blank=True)
 
     def __str__(self):
         """ 
-        When requested, return the ticket number.
+        When requested, return the document_number.
         """
         return self.document_number

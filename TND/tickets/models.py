@@ -41,3 +41,11 @@ class Ticket(models.Model):
         When requested, return the document_number.
         """
         return self.document_number
+
+    def was_published_recently(self):
+        """
+        This function will determine if a ticket has been published in the last
+        day.
+        """
+        now = timezone.now()
+        return now - datetime.timedelta(days=1) <= self.pub_date <= now

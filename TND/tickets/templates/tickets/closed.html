@@ -16,24 +16,15 @@ th {
 </head>
 <body>
 
-<p> Welcome to Tickets 'n Docs. </p>
-<p> This application will allow you to create tickets to fix issues.
-The system should be intuitive. </p>
+<!-- The item below is a link to return to the ticket index.-->
+<a href="{% url "tickets:index" %}"> Return to Ticket Index </a>
 
-<ul>
-    <a href="{% url "tickets:newForm" %}"> Create new ticket.</a>
-</ul>
-
-<ul>
-    <a href="{% url "tickets:closed" %}"> View closed tickets.</a>
-</ul>
-
-<!-- The following will create a table with the open tickets of the system
+<!-- The following will create a table with the closed tickets of the system
 listed for use. -->
 
-<h3> Open Ticket List </h3>
+<h3> Closed Ticket List </h3>
 
-{% if open_ticket_list %}
+{% if closed_ticket_list %}
   <ul> 
   <table style="width:30%">
 
@@ -43,7 +34,7 @@ listed for use. -->
       </tr>
 
   <ul>
-  {% for ticket in open_ticket_list %}
+  {% for ticket in closed_ticket_list %}
 
       <tr>
           <td> <a href="{% url "tickets:form" ticket.id %}">
@@ -56,8 +47,5 @@ listed for use. -->
   </ul>
 
 {% else %}
-  <p>No tickets are available. Great work, team! Go home and give yourself a 
-  reward.</p>
+  <p>No tickets have been closed.</p>
 {% endif %}
-
-

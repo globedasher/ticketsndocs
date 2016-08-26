@@ -19,6 +19,10 @@ urlpatterns = [
     # URL for the index of existing tickets
     url(r'^$', views.TicketIndex.as_view(), name='index'),
 
+    # URL for the index of closed tickets
+    url(r'closed/$', views.ClosedTicketIndex.as_view(), 
+        name='closed'),
+
     # URL for a blank form for a new ticket
     url(r'newForm/$', views.create_ticket, name='newForm'),
 

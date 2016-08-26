@@ -36,6 +36,23 @@ class TicketIndex(generic.ListView):
         return context
 
 
+# This class view shows all the tickets that are closed
+class ClosedTicketIndex(generic.ListView):
+    template_name = "tickets/closed.html"
+    context_object_name = "closed_ticket_list"
+
+    def get_queryset(self):
+        """
+        Return all the tickets.
+        """
+        # The following get the ticket objects from the database that exist but
+        # do not have a close date to populate the currently open ticket list.
+        # This list is then ordered by id number.
+        closed_tickets = Ticket.objects.filter(close_date__isnull=False)
+        context = closed_tickets.order_by('id')
+        return context
+
+
 def create_ticket(request):
     # This function is used to display a blank form for data input and to
     # accept post data from the blank form.

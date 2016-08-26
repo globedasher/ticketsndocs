@@ -2,8 +2,9 @@
 <html>
 <head>
 <style>
+
 table, th, td {
-    border: 1px solid black;
+    border: 1px solid green;
     border-collapse: collapse;
 }
 th, td {
@@ -16,22 +17,30 @@ th {
 </head>
 <body>
 
-<p> Welcome to Tickets 'n Docs. </p>
-<p> This application will allow you to create tickets to fix issues.
-The system should be intuitive. </p>
+<!-- Load the CSS files for stylizing the page. This doesn't seem to be working
+right at this moment.-->
+{% load staticfiles %}
 
-<ul>
+<link rel="stylesheet" type="text/css" 
+    href="{% static 'tickets/style.css' %}" />
+
+<!-- However, I have added inline styles below. -->
+<p style="color:green;margin-left:30px;"> Welcome to Tickets 'n Docs. </p>
+<p style="color:green;margin-left:30px;"> This application will allow 
+you to create tickets to fix issues. The system should be intuitive. </p>
+
+<ul style="margin-left:-10px;">
     <a href="{% url "tickets:newForm" %}"> Create new ticket.</a>
 </ul>
 
-<ul>
+<ul style="margin-left:-10px;">
     <a href="{% url "tickets:closed" %}"> View closed tickets.</a>
 </ul>
 
 <!-- The following will create a table with the open tickets of the system
 listed for use. -->
 
-<h3> Open Ticket List </h3>
+<h3 style="color:green;margin-left:30px;"> Open Ticket List </h3>
 
 {% if open_ticket_list %}
   <ul> 
@@ -48,7 +57,7 @@ listed for use. -->
       <tr>
           <td> <a href="{% url "tickets:form" ticket.id %}">
                   {{ ticket.id }}</a></td>
-          <td><a href="{% url "tickets:form" ticket.id %}">
+          <td> <a href="{% url "tickets:form" ticket.id %}">
                   {{ ticket.document_number }}</a></td>
       </tr>
 

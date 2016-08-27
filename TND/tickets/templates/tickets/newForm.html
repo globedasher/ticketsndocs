@@ -1,10 +1,35 @@
 <!DOCTYPE >
 <html>
+<head>
+
+<!-- Load the CSS files for stylizing the page. This does not seem to be working
+right at this moment.-->
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" 
+    href="{% static 'tickets/style.css' %}" />
+
+</head>
 <body>
 
 <form action="{% url "tickets:create_ticket" %}" method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+
+    Published date:<br>
+    {{ form.pub_date }}<br>
+    Document number:<br>
+    {{ form.document_number }}<br>
+    Comments for revision:<br>
+    {{ form.comments_for_revision }}<br>
+    Reported by:<br>
+    {{ form.reported_by }}<br>
+    Reported by email:<br>
+    {{ form.reported_by_email }}<br>
+    Major revision:<br>
+    {{ form.major_revision }}<br>
+    Minor revision:<br>
+    {{ form.minor_revision }}<br>
+    
     <input type="submit" value="Submit Ticket"  /><br>
 
 </form>

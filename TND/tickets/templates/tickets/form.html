@@ -1,5 +1,15 @@
 <!DOCTYPE >
 <html>
+<head>
+
+<!-- Load the CSS files for stylizing the page. This does not seem to be working
+right at this moment.-->
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" 
+    href="{% static 'tickets/style.css' %}" />
+
+</head>
 <body>
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
@@ -8,8 +18,32 @@
 
 <form action="{% url "tickets:update" ticket.id %}" method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Update Ticket"  /><br>
+
+    Published date:<br>
+    {{ form.pub_date }}<br>
+    Document number:<br>
+    {{ form.document_number }}<br>
+    Comments for revision:<br>
+    {{ form.comments_for_revision }}<br>
+    Reported by:<br>
+    {{ form.reported_by }}<br>
+    Reported by email:<br>
+    {{ form.reported_by_email }}<br>
+    Editor:<br>
+    {{ form.editor }}<br>
+    Editor email:<br>
+    {{ form.editor_email }}<br>
+    Major revision:<br>
+    {{ form.major_revision }}<br>
+    Minor revision:<br>
+    {{ form.minor_revision }}<br>
+    Confirmed?<br>
+    {{ form.confirmed }}<br>
+    Closed date:<br>
+    {{ form.close_date }}<br>
+    
+    <p>
+    <input type="submit" value="Update Ticket"  /></p>
 
 </form>
 

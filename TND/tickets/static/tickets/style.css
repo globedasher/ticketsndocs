@@ -24,43 +24,50 @@ li a {
     color: #ffffff;
 }
 
-/* The following line should make links white... */
-
+/* Choose the color of hyperlinks. */
 a {
     color: #ffffff;
 }
 
-p {
-    font-family; "Calibri", Calibri, sanserif;
-
-}
-
+/* Align the table with the center of the web browser. */
 table.center {
     margin-left: auto;
     margin-right: auto;
 }
 
+/* Color the table headders a specific color. */
 th {
     background-color: blue;
     color: #ffffff;
 }
 
-tr:nth-child(even) {
+/* Color every other row of the tickets table a different color. */
+tr:nth-child(odd) {
     background-color: #9595db;
 }
 
+/* Change the background color of a table row based on mouse hover. */
 tr:hover {
     background-color: #7c7676;
 }
 
+/* Table line designs. */
 table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
 }
+
+/* The following line will style the table itself. I am attempting to make 
+ * all columns of the table carry the same dimensions.
+ */
+table {
+    table-layout: auto;
+}
+
 th, td {
     padding: 5px;
 }
+
 th {
     text-align: center;
 }
-

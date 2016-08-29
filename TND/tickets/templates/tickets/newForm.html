@@ -2,8 +2,7 @@
 <html>
 <head>
 
-<!-- Load the CSS files for stylizing the page. This does not seem to be working
-right at this moment.-->
+<!-- Load the CSS files for stylizing the page. -->
 {% load staticfiles %}
 
 <link rel="stylesheet" type="text/css" 
@@ -11,6 +10,13 @@ right at this moment.-->
 
 </head>
 <body>
+
+<a href="{% url "tickets:index" %}">
+  <img src="{% static "tickets/logo.png" %}" alt="Cannot load logo." 
+      style="width:40px;height:60px;">
+</a>
+
+<h3> Create a New Ticket </h3>
 
 <form action="{% url "tickets:create_ticket" %}" method="post">
     {% csrf_token %}
@@ -30,11 +36,8 @@ right at this moment.-->
     Minor revision:<br>
     {{ form.minor_revision }}<br>
     
-    <input type="submit" value="Submit Ticket"  /><br>
+    <p><input type="submit" value="Submit Ticket"  /></p>
 
 </form>
-<!-- The item below is a link to return to the ticket index.-->
-<a href="{% url "tickets:index" %}"> Return to Ticket Index </a>
-
 </body>
 </html>

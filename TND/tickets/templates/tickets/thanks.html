@@ -2,8 +2,8 @@
 <html>
 <head>
 
-<!-- Load the CSS files for stylizing the page. This does not seem to be working
-right at this moment.-->
+
+<!-- Load the CSS files for stylizing the page. -->
 {% load staticfiles %}
 
 <link rel="stylesheet" type="text/css" 
@@ -12,13 +12,15 @@ right at this moment.-->
 </head>
 <body>
 
+<a href="{% url "tickets:index" %}">
+  <img src="{% static "tickets/logo.png" %}" alt="Cannot load logo." 
+      style="width:40px;height:60px;">
+</a>
+
+
     {{ ticket.id }}
 
-Thank you for subimitting this ticket. You will receive a response shortly.
-<br>
-
-<!-- The item below is a link to return to the ticket index.-->
-<a href="{% url "tickets:index" %}"> Return to Ticket Index </a>
-
+<p>Thank you for subimitting this ticket. You will receive a response shortly.
+</p>
 </body>
 </html>

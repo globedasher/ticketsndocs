@@ -10,7 +10,7 @@ from django.core.urlresolvers import reverse
 from django.views import generic
 from django.utils import timezone
 from django import forms
-from django.forms import ModelForm, Textarea
+from django.forms import ModelForm, Textarea, SelectDateWidget
 
 from .models import Ticket
 
@@ -20,6 +20,7 @@ from .models import Ticket
 # This class is used to display a new ticket form, but only fields for
 # reporting an issue and not other fields used for corrective action.
 class NewForm(ModelForm):
+    # TODO: Add requried fields for all fo the fields on a new ticket.
     class Meta:
         model = Ticket
         fields = ['pub_date', 
@@ -33,7 +34,8 @@ class NewForm(ModelForm):
         # The following section defines the widgets used for fields on the
         # form.
         widgets = {
-                  'comments_for_revision': 
+                'pub_date': SelectDateWidget(),
+                'comments_for_revision': 
                       Textarea(attrs={'cols':50, 'rows':10}),
                   }
 
@@ -42,9 +44,8 @@ class NewForm(ModelForm):
 # tickets system.
 class DetailForm(ModelForm):
 
-    #confirmed = forms.BooleanField(required=False)
-    #close_date = forms.DateField(required=False)
-
+    # TODO: Insert errors when a single field is chosen for the close date and
+    # no other fields are selected. 
     class Meta:
         model = Ticket
         fields = ['pub_date', 
@@ -62,6 +63,8 @@ class DetailForm(ModelForm):
         # The following section defines the widgets used for fields on the
         # form.
         widgets = {
-                  'comments_for_revision': 
+                'pub_date': SelectDateWidget(),
+                'comments_for_revision': 
                       Textarea(attrs={'cols':50, 'rows':10}),
+                'close_date': SelectDateWidget(),
                   }

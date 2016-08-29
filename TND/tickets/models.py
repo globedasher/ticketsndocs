@@ -20,7 +20,8 @@ class Ticket(models.Model):
     review the documentation. The editor will markup changes and pass it back
     to the writer until they agree it can be released.  
     """
-    pub_date = models.DateField(max_length=100)
+    # TODO: Improve Ticet model to reflect more functions for support teams.
+    pub_date = models.DateField(max_length=100, default=timezone.now)
     document_number = models.CharField(max_length=30)
     comments_for_revision = models.CharField(max_length=500)
     reported_by = models.CharField(max_length=50)

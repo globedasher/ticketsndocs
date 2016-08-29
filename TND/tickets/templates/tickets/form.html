@@ -19,6 +19,8 @@ right at this moment.-->
 <form action="{% url "tickets:update" ticket.id %}" method="post">
     {% csrf_token %}
 
+    <!-- TODO: add error checking that will raise and issue if the correct
+        input data is not provided in the form. -->
     Published date:<br>
     {{ form.pub_date }}<br>
     Document number:<br>

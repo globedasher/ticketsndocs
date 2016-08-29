@@ -12,15 +12,20 @@ right at this moment.-->
 </head>
 <body>
 
-<p> Welcome to Tickets 'n Docs. </p>
+<a href="{% url "tickets:index" %}">
+  <img src="{% static "tickets/logo.png" %}" alt="Cannot load logo." 
+      style="width:40px;height:60px;">
+</a>
+
+<h2> Welcome to Tickets 'n Docs </h2>
 <p> This application will allow 
 you to create tickets to fix issues. The system should be intuitive. </p>
 
-<ul > 
+<ul style="margin-left: -25px;"> 
     <a href="{% url "tickets:newForm" %}"> Create new ticket.</a>
 </ul>
 
-<ul>
+<ul style="margin-left: -20px;"> 
     <a href="{% url "tickets:closed" %}"> View closed tickets.</a>
 </ul>
 

@@ -12,8 +12,14 @@ right at this moment.-->
 </head>
 <body>
 
+<!-- Display the TnD logo. -->
+<a href="{% url "tickets:index" %}">
+  <img src="{% static "tickets/logo.png" %}" alt="Cannot load logo." 
+      style="width:40px;height:60px;">
+</a>
+
 <!-- The item below is a link to return to the ticket index.-->
-<a href="{% url "tickets:index" %}"> Return to Ticket Index </a>
+<p><a href="{% url "tickets:index" %}"> Return to Ticket Index </a></p>
 
 <!-- The following will create a table with the closed tickets of the system
 listed for use. -->

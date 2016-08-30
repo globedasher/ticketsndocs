@@ -34,8 +34,6 @@ listed for use. -->
 
 <h3> Open Ticket List </h3>
 
-{% if open_ticket_list %}
-  <ul> 
   <table class="center">
 
       <tr>
@@ -45,7 +43,7 @@ listed for use. -->
           <th>Email</th>
       </tr>
 
-  <ul>
+{% if open_ticket_list %}
   {% for ticket in open_ticket_list %}
 
       <tr>
@@ -62,11 +60,14 @@ listed for use. -->
 
   {% endfor %}
   </table>
-  </ul>
 
 {% else %}
-  <p> No tickets are available. Great work, team! 
-  Go home and give yourself a reward.</p>
+<tr>
+  <td> No open tickets exist. </td>
+  <td> Great work, team! </td>
+  <td> </td>
+  <td> </td>
+</tr>
 {% endif %}
 
 </body>

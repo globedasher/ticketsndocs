@@ -18,16 +18,11 @@
       style="width:40px;height:60px;">
 </a>
 
-<!-- The item below is a link to return to the ticket index.-->
-<p><a href="{% url "tickets:index" %}"> Return to Ticket Index </a></p>
-
 <!-- The following will create a table with the closed tickets of the system
 listed for use. -->
 
 <h3> Closed Ticket List </h3>
 
-{% if closed_ticket_list %}
-  <ul> 
     <table class="center">
 
 
@@ -38,6 +33,7 @@ listed for use. -->
           <th>Email</th>
       </tr>
 
+{% if closed_ticket_list %}
   <ul>
   {% for ticket in closed_ticket_list %}
 

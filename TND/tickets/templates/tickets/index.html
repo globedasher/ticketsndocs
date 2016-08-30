@@ -41,6 +41,8 @@ listed for use. -->
       <tr>
           <th>Ticket Number</th>
           <th>Document Number</th>
+          <th>Reported by</th>
+          <th>Email</th>
       </tr>
 
   <ul>
@@ -51,6 +53,10 @@ listed for use. -->
                   {{ ticket.id }}</a></td>
           <td> <a href="{% url "tickets:form" ticket.id %}">
                   {{ ticket.document_number }}</a></td>
+          <td> <a href="{% url "tickets:form" ticket.id %}">
+                  {{ ticket.reported_by }}</a></td>
+          <td> <a href="{% url "tickets:form" ticket.id %}">
+                  {{ ticket.reported_by_email }}</a></td>
       </tr>
 
 
@@ -62,3 +68,5 @@ listed for use. -->
   <p> No tickets are available. Great work, team! 
   Go home and give yourself a reward.</p>
 {% endif %}
+
+</body>

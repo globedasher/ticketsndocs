@@ -30,9 +30,12 @@ listed for use. -->
   <ul> 
     <table class="center">
 
+
       <tr>
           <th>Ticket Number</th>
           <th>Document Number</th>
+          <th>Reported by</th>
+          <th>Email</th>
       </tr>
 
   <ul>
@@ -41,8 +44,12 @@ listed for use. -->
       <tr>
           <td> <a href="{% url "tickets:form" ticket.id %}">
                   {{ ticket.id }}</a></td>
-          <td><a href="{% url "tickets:form" ticket.id %}">
+          <td> <a href="{% url "tickets:form" ticket.id %}">
                   {{ ticket.document_number }}</a></td>
+          <td> <a href="{% url "tickets:form" ticket.id %}">
+                  {{ ticket.reported_by }}</a></td>
+          <td> <a href="{% url "tickets:form" ticket.id %}">
+                  {{ ticket.reported_by_email }}</a></td>
       </tr>
 
   {% endfor %}
@@ -52,3 +59,5 @@ listed for use. -->
 {% else %}
   <p>No tickets have been closed.</p>
 {% endif %}
+
+</body>

@@ -51,6 +51,12 @@ tr:hover {
     background-color: #7c7676;
 }
 
+/* Provide a division frame */
+div {
+    background-color: #00001f;
+    border-radius:25px;
+}
+
 /* Table line designs. */
 table, th, td {
     border: 1px solid black;
@@ -61,7 +67,7 @@ table, th, td {
  * all columns of the table carry the same dimensions.
  */
 table {
-    table-layout: auto;
+    width: 100%;
 }
 
 th, td {

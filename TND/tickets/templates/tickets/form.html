@@ -1,58 +1,47 @@
-<!DOCTYPE >
+<!doctype html >
 <html>
 <head>
-
-<title> Tickets 'n Docs </title>
-
+<title> Tickets 'n Docs - Update and existing ticket </title>
 <!-- Load the CSS files for stylizing the page. -->
 {% load staticfiles %}
-
 <link rel="stylesheet" type="text/css" 
     href="{% static 'tickets/style.css' %}" />
-
 </head>
 <body>
-
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-
 <a href="{% url "tickets:index" %}">
   <img src="{% static "tickets/logo.png" %}" alt="Cannot load logo." 
       style="width:40px;height:60px;">
 </a>
-
 <h3>Ticket # {{ ticket.id }}</h3>
-
 <form action="{% url "tickets:update" ticket.id %}" method="post">
-    {% csrf_token %}
-
-    <!-- TODO: add error checking that will raise and issue if the correct
-        input data is not provided in the form. -->
-    Published date:<br>
-    {{ form.pub_date }}<br>
-    Document number:<br>
-    {{ form.document_number }}<br>
-    Comments for revision:<br>
-    {{ form.comments_for_revision }}<br>
-    Reported by:<br>
-    {{ form.reported_by }}<br>
-    Reported by email:<br>
-    {{ form.reported_by_email }}<br>
-    Engineer:<br>
-    {{ form.eng }}<br>
-    Engineer email:<br>
-    {{ form.eng_email }}<br>
-    Revision:<br>
-    {{ form.revision }}<br>
-    Engineer comments:<br>
-    {{ form.eng_comments }}<br>
-    Confirmed?<br>
-    {{ form.confirmed }}<br>
-    Closed date:<br>
-    {{ form.close_date }}<br>
-    
-    <p>
-    <input type="submit" value="Update Ticket"  /></p>
-
+  {% csrf_token %}
+  <!-- TODO: add error checking that will raise and issue if the correct
+      input data is not provided in the form. -->
+  Published date:<br>
+  {{ form.pub_date }}<br>
+  Document number:<br>
+  {{ form.document_number }}<br>
+  Comments for revision:<br>
+  {{ form.comments_for_revision }}<br>
+  Reported by:<br>
+  {{ form.reported_by }}<br>
+  Reported by email:<br>
+  {{ form.reported_by_email }}<br>
+  Engineer:<br>
+  {{ form.eng }}<br>
+  Engineer email:<br>
+  {{ form.eng_email }}<br>
+  Revision:<br>
+  {{ form.revision }}<br>
+  Engineer comments:<br>
+  {{ form.eng_comments }}<br>
+  Confirmed?<br>
+  {{ form.confirmed }}<br>
+  Closed date:<br>
+  {{ form.close_date }}<br>
+  <p>
+  <input type="submit" value="Update Ticket"  /></p>
 </form>
 </body>
 </html>

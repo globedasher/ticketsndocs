@@ -1,60 +1,46 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-
 <title> Tickets 'n Docs </title>
-
 <!-- Load the CSS files for stylizing the page. -->
 {% load staticfiles %}
-
 <link rel="stylesheet" type="text/css" 
-    href="{% static 'tickets/style.css' %}" />
-
+  href="{% static 'tickets/style.css' %}" />
 </head>
 <body>
-
 <!-- Display the TnD logo. -->
 <a href="{% url "tickets:index" %}">
   <img src="{% static "tickets/logo.png" %}" alt="Cannot load logo." 
       style="width:40px;height:60px;">
 </a>
-
 <!-- The following will create a table with the closed tickets of the system
 listed for use. -->
-
 <h3> Closed Ticket List </h3>
-
-    <table class="center">
-
-
-      <tr>
-          <th>Ticket Number</th>
-          <th>Document Number</th>
-          <th>Reported by</th>
-          <th>Email</th>
-      </tr>
-
+  <table class="center">
+    <tr>
+      <th>Ticket Number</th>
+      <th>Document Number</th>
+      <th>Reported by</th>
+      <th>Email</th>
+    </tr>
 {% if closed_ticket_list %}
   <ul>
   {% for ticket in closed_ticket_list %}
-
-      <tr>
-          <td> <a href="{% url "tickets:form" ticket.id %}">
-                  {{ ticket.id }}</a></td>
-          <td> <a href="{% url "tickets:form" ticket.id %}">
-                  {{ ticket.document_number }}</a></td>
-          <td> <a href="{% url "tickets:form" ticket.id %}">
-                  {{ ticket.reported_by }}</a></td>
-          <td> <a href="{% url "tickets:form" ticket.id %}">
-                  {{ ticket.reported_by_email }}</a></td>
-      </tr>
-
+    <tr>
+      <td> <a href="{% url "tickets:form" ticket.id %}">
+          {{ ticket.id }}</a></td>
+      <td> <a href="{% url "tickets:form" ticket.id %}">
+          {{ ticket.document_number }}</a></td>
+      <td> <a href="{% url "tickets:form" ticket.id %}">
+          {{ ticket.reported_by }}</a></td>
+      <td> <a href="{% url "tickets:form" ticket.id %}">
+          {{ ticket.reported_by_email }}</a></td>
+    </tr>
   {% endfor %}
   </table>
   </ul>
-
 {% else %}
   <p>No tickets have been closed.</p>
 {% endif %}
-
 </body>
+</html>

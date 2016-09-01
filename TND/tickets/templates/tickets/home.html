@@ -1,25 +1,19 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-
 <title> Tickets 'n Docs </title>
-
 <!-- Load the CSS files for stylizing the page. -->
 {% load staticfiles %}
-
 <link rel="stylesheet" type="text/css" 
     href="{% static 'tickets/style.css' %}" />
-
 </head>
 <body>
-
 <a href="{% url "tickets.urls" %}">
   <img src="{% static "tickets/logo.png" %}" alt="Cannot load logo." 
       style="width:40px;height:60px;">
 </a>
-
 <h2> Welcome to Tickets 'n Docs </h2>
 <p> This application will allow 
 you to create tickets to fix issues. The system should be intuitive. </p>
-
 </body>
+</html>

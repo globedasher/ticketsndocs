@@ -1,26 +1,18 @@
-<!DOCTYPE >
+<!doctype html >
 <html>
 <head>
-
-<title> Tickets 'n Docs </title>
-
+<title> Tickets 'n Docs - Thank you </title>
 <!-- Load the CSS files for stylizing the page. -->
 {% load staticfiles %}
-
 <link rel="stylesheet" type="text/css" 
     href="{% static 'tickets/style.css' %}" />
-
 </head>
 <body>
-
 <a href="{% url "tickets:index" %}">
   <img src="{% static "tickets/logo.png" %}" alt="Cannot load logo." 
       style="width:40px;height:60px;">
 </a>
-
-
-    {{ ticket.id }}
-
+{{ ticket.id }}
 <p>Thank you for subimitting this ticket. You will receive a response shortly.
 </p>
 </body>

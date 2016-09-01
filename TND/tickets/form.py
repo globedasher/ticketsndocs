@@ -28,8 +28,7 @@ class NewForm(ModelForm):
                   'comments_for_revision',
                   'reported_by', 
                   'reported_by_email', 
-                  'major_revision', 
-                  'minor_revision'
+                  'revision', 
                   ]
         # The following section defines the widgets used for fields on the
         # form.
@@ -53,10 +52,10 @@ class DetailForm(ModelForm):
                   'comments_for_revision',
                   'reported_by', 
                   'reported_by_email', 
-                  'editor', 
-                  'editor_email', 
-                  'major_revision', 
-                  'minor_revision',
+                  'eng', 
+                  'eng_email', 
+                  'revision', 
+                  'eng_comments',
                   'confirmed',
                   'close_date',
                   ]
@@ -65,6 +64,8 @@ class DetailForm(ModelForm):
         widgets = {
                 'pub_date': SelectDateWidget(),
                 'comments_for_revision': 
-                      Textarea(attrs={'cols':50, 'rows':10}),
+                    Textarea(attrs={'cols':50, 'rows':10}),
+                'eng_comments':
+                    Textarea(attrs={'cols':50, 'rows':10}),
                 'close_date': SelectDateWidget(),
                   }

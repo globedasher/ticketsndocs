@@ -71,8 +71,7 @@ def create_ticket(request):
                           comments_for_revision = form.cleaned_data['comments_for_revision'],
                           reported_by = form.cleaned_data['reported_by'], 
                           reported_by_email = form.cleaned_data['reported_by_email'],
-                          major_revision = form.cleaned_data['major_revision'],
-                          minor_revision = form.cleaned_data['minor_revision'],
+                          revision = form.cleaned_data['revision'],
                           )
             tick.save()
             # Redirect to a new URL

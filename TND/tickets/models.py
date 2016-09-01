@@ -26,13 +26,12 @@ class Ticket(models.Model):
     comments_for_revision = models.CharField(max_length=500)
     reported_by = models.CharField(max_length=50)
     reported_by_email = models.EmailField(max_length=50)
-    editor = models.CharField(max_length=50, blank=True)
-    editor_email = models.EmailField(max_length=50, blank=True)
+    eng = models.CharField(max_length=50, blank=True)
+    eng_email = models.EmailField(max_length=50, blank=True)
     # major_revision will only be incremented when a release is posted. It will
     # remain a zero until that point. (0.1, 0.2,... 1.0)
-    major_revision = models.CharField(max_length=2, blank=True)
-    # minor_revision will be incremented with each file commit.
-    minor_revision = models.CharField(max_length=2, blank=True)
+    revision = models.CharField(max_length=4, blank=True)
+    eng_comments = models.CharField(max_length=1000, blank=True)
     confirmed = models.BooleanField(default=False, blank=True)
     close_date = models.DateField(max_length=100, null=True, blank=True)
 

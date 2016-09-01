@@ -1,4 +1,4 @@
-<!DOCTYPE >
+<!DOCTYPE html>
 <html>
 <head>
 
@@ -13,15 +13,13 @@
 </head>
 <body>
 
-<a href="{% url "tickets:index" %}">
+<a href="{% url "tickets.urls" %}">
   <img src="{% static "tickets/logo.png" %}" alt="Cannot load logo." 
       style="width:40px;height:60px;">
 </a>
 
+<h2> Welcome to Tickets 'n Docs </h2>
+<p> This application will allow 
+you to create tickets to fix issues. The system should be intuitive. </p>
 
-    {{ ticket.id }}
-
-<p>Thank you for subimitting this ticket. You will receive a response shortly.
-</p>
 </body>
-</html>

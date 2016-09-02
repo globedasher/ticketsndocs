@@ -66,12 +66,23 @@ def create_ticket(request):
             # save it to the database. In this instance, the cleaned_data is a
             # dictionary from the form object. Each key presents the data
             # obtained from the form.
-            tick = Ticket(pub_date = form.cleaned_data['pub_date'], 
-                          document_number = form.cleaned_data['document_number'],
-                          comments_for_revision = form.cleaned_data['comments_for_revision'],
-                          reported_by = form.cleaned_data['reported_by'], 
-                          reported_by_email = form.cleaned_data['reported_by_email'],
-                          revision = form.cleaned_data['revision'],
+            print(form.cleaned_data)
+            tick = Ticket(pub_date = 
+                                form.cleaned_data['pub_date'], 
+                          document_number = 
+                                form.cleaned_data['document_number'],
+                          comments_for_revision = 
+                                form.cleaned_data['comments_for_revision'],
+                          reported_by = 
+                                form.cleaned_data['reported_by'], 
+                          reported_by_email = 
+                                form.cleaned_data['reported_by_email'],
+                          url_of_issue = 
+                                form.cleaned_data['url_of_issue'],
+                          pic_of_issue = 
+                                form.cleaned_data['pic_of_issue'],
+                          revision = 
+                                form.cleaned_data['revision'],
                           )
             tick.save()
             # Redirect to a new URL

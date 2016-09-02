@@ -26,8 +26,8 @@ class Ticket(models.Model):
     comments_for_revision = models.CharField(max_length=500)
     reported_by = models.CharField(max_length=50)
     reported_by_email = models.EmailField(max_length=50)
-    # TODO: url_of_issue = models.CharField(max_length=200, blank=True)
-    # TODO: pic_of_issue = models.FileFiels()
+    url_of_issue = models.CharField(max_length=200, blank=True)
+    pic_of_issue = models.FileField(blank=True)
     eng = models.CharField(max_length=50, blank=True)
     eng_email = models.EmailField(max_length=50, blank=True)
     # major_revision will only be incremented when a release is posted. It will

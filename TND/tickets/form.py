@@ -28,6 +28,8 @@ class NewForm(ModelForm):
                   'comments_for_revision',
                   'reported_by', 
                   'reported_by_email', 
+                  'url_of_issue',
+                  'pic_of_issue',
                   'revision', 
                   ]
         # The following section defines the widgets used for fields on the
@@ -52,6 +54,8 @@ class DetailForm(ModelForm):
                   'comments_for_revision',
                   'reported_by', 
                   'reported_by_email', 
+                  'url_of_issue',
+                  'pic_of_issue',
                   'eng', 
                   'eng_email', 
                   'revision', 

@@ -58,15 +58,15 @@ def create_ticket(request):
     # accept post data from the blank form.
     # If a POST reqest, we need to process the form data
     if request.method == 'POST':
-        # Create a new form instance and populate it with data from the request
+        # Create a new form instance and populate it with data from the user
+        # input.
         form = NewForm(request.POST)
-        # Check if the data is valid
+        # Check if the data is valid.
         if form.is_valid():
             # Process the cleaned data and place it in the ticket elements then
             # save it to the database. In this instance, the cleaned_data is a
             # dictionary from the form object. Each key presents the data
             # obtained from the form.
-            print(form.cleaned_data)
             tick = Ticket(pub_date = 
                                 form.cleaned_data['pub_date'], 
                           document_number = 
@@ -102,7 +102,7 @@ def open_ticket(request, pk):
         form = DetailForm(request.POST)
         # Check if the data is valid
         if form.is_valid():
-            # Process the data in form.clean_data
+            # Process the data from the form
             target = Ticket.objects.get(pk=pk)
             tick = DetailForm(request.POST, instance=target)
             tick.save()
@@ -118,10 +118,6 @@ def open_ticket(request, pk):
         context = {'form':form, 'ticket':ticket}
 
     # The following renders the form with the above contextual data.
-    #
-    # TODO: 
-    # form.is_valid() function on line 76 is
-    # coming back False since the close_date and other fields are required.
     return render(request, 'tickets/form.html', context)
 
 # The folling definition displays a thank you page

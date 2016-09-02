@@ -49,16 +49,8 @@ class DetailForm(ModelForm):
     # no other fields are selected. 
     class Meta:
         model = Ticket
-        fields = ['pub_date', 
-                  'document_number', 
-                  'comments_for_revision',
-                  'reported_by', 
-                  'reported_by_email', 
-                  'url_of_issue',
-                  'pic_of_issue',
-                  'eng', 
+        fields = ['eng', 
                   'eng_email', 
-                  'revision', 
                   'eng_comments',
                   'confirmed',
                   'close_date',
@@ -66,9 +58,6 @@ class DetailForm(ModelForm):
         # The following section defines the widgets used for fields on the
         # form.
         widgets = {
-                'pub_date': SelectDateWidget(),
-                'comments_for_revision': 
-                    Textarea(attrs={'cols':50, 'rows':10}),
                 'eng_comments':
                     Textarea(attrs={'cols':50, 'rows':10}),
                 'close_date': SelectDateWidget(),

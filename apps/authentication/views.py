@@ -12,15 +12,15 @@ def index(request):
     try:
         all_users = User.objects.all()
         context = { 'all_users': all_users }
-        return render(request, 'log_n_reg_app/index.html', context)
+        return render(request, 'authentication/index.html', context)
     except:
-        return render(request, 'log_n_reg_app/index.html')
+        return render(request, 'authentication/index.html')
 
 def home(request):
     if not request.user.is_authenticated:
         messages.error(request, "Please login first.")
         return redirect(reverse('login:index'))
-    return render(request, "log_n_reg_app/home.html")
+    return render(request, "authentication/home.html")
 
 def users(request):
     if not request.user.is_authenticated:
@@ -28,7 +28,7 @@ def users(request):
         return redirect(reverse('login:index'))
     all_users = User.objects.all()
     context = { 'all_users': all_users }
-    return render(request, "log_n_reg_app/users.html", context)
+    return render(request, "authentication/users.html", context)
 
 """ 
 The tuple_return in the login and register functions return a true if the email

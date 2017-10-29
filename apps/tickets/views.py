@@ -11,7 +11,7 @@ from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
 
-from .models import Ticket
+from .models import Ticket, Note
 
 
 # Create your views here.
@@ -69,6 +69,13 @@ def open_ticket(request, pk):
     # This function is used to render a bound form with existing data to update
     # an existing ticket. 
     if request.method == 'POST':
+        ticket = Ticket.objects.get(pk=pk)
+        note = Note(ticket=ticket, eng=request.user, eng_comments=request.POST['eng_comments'])
+        print(note)
+        note.save()
+        return HttpResponseRedirect('/tickets/thanks/')
+
+
         # The following code will save altered data to an existing ticket.
         form = DetailForm(request.POST)
         # Check if the data is valid
@@ -84,8 +91,10 @@ def open_ticket(request, pk):
     # If GET or any other method, present a form with data from an exiting
     # ticket. 
     else:
+        notes = Note.objects.filter(ticket__pk=pk)
+        #print(pk)
         ticket = Ticket.objects.get(pk=pk)
-        context = {'ticket':ticket}
+        context = {"ticket": ticket, "notes": notes}
         # The following renders the form with the above contextual data.
         return render(request, 'tickets/form.html', context)
 

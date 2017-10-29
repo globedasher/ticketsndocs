@@ -11,63 +11,78 @@ table, th, td {
 <title> Tickets 'n Docs - Update and existing ticket </title>
 <!-- Load the CSS files for stylizing the page. -->
 {% load staticfiles %}
-<link rel="stylesheet" type="text/css" 
-    href="{% static 'tickets/style.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'tickets/style.css' %}" />
 </head>
 <body>
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+{% if error_message %}
+<p><strong>{{ error_message }}</strong></p>
+{% endif %}
 <a href="{% url "tickets:index" %}">
-  <img src="{% static "tickets/logo.png" %}" alt="Cannot load logo." 
-      style="width:40px;height:60px;">
+  <img src="{% static "tickets/logo.png" %}" alt="Cannot load logo." style="width:40px;height:60px;">
 </a>
-<h3>Ticket # {{ ticket.id }}</h3>
-  <table>
-    <tr>
-      <th>Published date:</th>
-      <th>Document number:</th>
-      <th>Revision:</th>
-      <th>Comments for revision:</th>
-      <th>Reported by:</th>
-      <th>Reported by email:</th>
-      <th>Issue URL:</th>
-      <th>Picture of issue:</th>
-    </tr>
-    <tr>
-      <td>{{ ticket.pub_date }}</td>
-      <td>{{ ticket.document_number }}</td>
-      <td>{{ ticket.revision }}</td>
-      <td>{{ ticket.comments_for_revision }}</td>
-      <td>{{ ticket.reported_by.first_name }} {{ ticket.reported_by.last_name }}</td>
-      <td>{{ ticket.reported_by.email }}</td>
-      <td>{{ ticket.url_of_issue }}</td>
-      <!-- I want to display a picture loaded to the database here... -->
-      <td><img src="{{ ticket.pic_of_issue }}" alt="No image"
-        style="width:60px;height:60px;"></td>
-    </tr>
-  </table>
-<p>
+<h4>Ticket Number {{ ticket.id }}</h4>
+<table>
+  <tr>
+    <th>Created:</th>
+    <th>Document number:</th>
+    <th>Revision:</th>
+    <th>Comments for revision:</th>
+    <th>Reported by:</th>
+    <th>Reported by email:</th>
+    <th>Issue URL:</th>
+    <th>Closed date:</th>
+    <th>Confirmed?</th>
+    <th>Picture of issue:</th>
+  </tr>
+  <tr>
+    <td>{{ ticket.created_at }}</td>
+    <td>{{ ticket.document_number }}</td>
+    <td>{{ ticket.revision }}</td>
+    <td>{{ ticket.comments_for_revision }}</td>
+    <td>{{ ticket.reported_by.first_name }} {{ ticket.reported_by.last_name }}</td>
+    <td>{{ ticket.reported_by.email }}</td>
+    <td>{{ ticket.url_of_issue }}</td>
+    <td><input type="text" name="closed_date"></td>
+    <td><input type="checkbox" name="confirmed"></td>
+    <td>Picture of issue:
+    <!-- I want to display a picture loaded to the database here... -->
+    <img src="{{ ticket.pic_of_issue }}" alt="No image"
+      style="width:60px;height:60px;"></td>
+  </tr>
+</table>
+<h4>Previous notes about this ticket.</h4>
+<table>
+  <tr>
+    <th>Reported By</th>
+    <th>Comments</th>
+    <th>Created</th>
+  </tr>
+  {% for note in notes %}
+  <tr>
+    <td>{{ note.eng.first_name }} {{ note.eng.last_name }}</td>
+    <td>{{ note.eng_comments }}</td>
+    <td>{{ note.created_at }}</td>
+  </tr>
+  {% endfor %}
+</table>
 <form action="{% url "tickets:update" ticket.id %}" method="post">
   {% csrf_token %}
   <!-- TODO: add error checking that will raise and issue if the correct
       input data is not provided in the form. -->
+  <h4>Please add notes below</h4>
   <table>
     <tr>
       <th>Engineer:</th>
       <th>Engineer email:</th>
       <th>Engineer comments:</th>
-      <th>Comments?</th>
-      <th>Closed date:</th>
     </tr>
     <tr>
       <td>{{ user.first_name }} {{ user.last_name }}</td>
       <td>{{ user.email }}</td>
-      <td><input type="text" name="eng_comments"></td>
-      <td><input type="checkbox" name="confirmed"></td>
-      <td><input type="text" name="closed_date"></td>
+      <td><textarea name="eng_comments" rows="10" cols="50"></textarea></td>
     </tr>
   </table>
   <p><input type="submit" value="Update Ticket"  /></p>
-</p>
 </form>
 </body>
 </html>

@@ -10,6 +10,7 @@
   </head>
   <body>
     <div id="container">
+      <h4>Hello, {{ request.user.email }}.</h4>
       <div id="messages">
         {% if messages %}
         <ul class="messages">
@@ -21,23 +22,11 @@
         </ul>
         {% endif %}
       </div>
-      <h4>User number: {{ request.session.id }} </h4>
-      <h4>User account: {{ request.session.email }}</h4>
       <ul>
         <li><a href={% url 'tickets:index' %}>Tickets</a></li>
+        <li><a href={% url 'login:users' %}>Users</a></li>
         <li><a href={% url 'login:logout' %}>Logout</a></li>
       </ul>
-
-      {% for user in all_users %}
-      <p>
-        {{ user.id }}
-        {{ user.first_name }}
-        {{ user.last_name }}
-        {{ user.email }}
-      </p>
-      {% endfor %}
-
     </div>
-    <a href="admin/">admin</a>
   </body>
 </html>

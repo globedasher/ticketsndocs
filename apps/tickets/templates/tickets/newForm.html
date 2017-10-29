@@ -22,34 +22,26 @@ table, th, td {
 <h3> Create a New Ticket </h3>
 <form action="{% url "tickets:create_ticket" %}" method="post">
   {% csrf_token %}
-  <p>
   <table>
     <tr>
-      <th>Published date:</th>
-      <th>Document number:</th>
-      <th>Revision:</th>
-      <th>Comments for revision:</th>
+      <td>Document number:</td>
+      <td><input type="text" name="document_number"></td>
     </tr>
     <tr>
-      <td>{{ form.pub_date }}</td>
-      <td>{{ form.document_number }}</td>
-      <td>{{ form.revision }}</td>
-      <td>{{ form.comments_for_revision }}</td>
-    </tr>
-  </table>
-  </p>
-  <table>
-    <tr>
-      <th>Reported by:</th>
-      <th>Reported by email:</th>
-      <th>Issue URL:</th>
-      <th>Picture of issue:</th>
+      <td>Revision:</td>
+      <td><input type="text" name="revision"></td>
     </tr>
     <tr>
-      <td>{{ form.reported_by }}</td>
-      <td>{{ form.reported_by_email }}</td>
-      <td>{{ form.url_of_issue }}</td>
-      <td>{{ form.pic_of_issue }}</td>
+      <td>Comments for revision:</td>
+      <td><input type="textarea" name="comments_for_revision"></td>
+    </tr>
+    <tr>
+      <td>Issue URL:</td>
+      <td><input type="text" name="url_of_issue"></td>
+    </tr>
+    <tr>
+      <td>Picture of issue:</td>
+      <td><input type="text" name="pic_of_issue"></td>
     </tr>
   </table>
 

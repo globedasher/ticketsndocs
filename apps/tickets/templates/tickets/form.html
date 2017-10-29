@@ -37,8 +37,8 @@ table, th, td {
       <td>{{ ticket.document_number }}</td>
       <td>{{ ticket.revision }}</td>
       <td>{{ ticket.comments_for_revision }}</td>
-      <td>{{ ticket.reported_by }}</td>
-      <td>{{ ticket.reported_by_email }}</td>
+      <td>{{ ticket.reported_by.first_name }} {{ ticket.reported_by.last_name }}</td>
+      <td>{{ ticket.reported_by.email }}</td>
       <td>{{ ticket.url_of_issue }}</td>
       <!-- I want to display a picture loaded to the database here... -->
       <td><img src="{{ ticket.pic_of_issue }}" alt="No image"
@@ -59,11 +59,11 @@ table, th, td {
       <th>Closed date:</th>
     </tr>
     <tr>
-      <td>{{ form.eng }}</td>
-      <td>{{ form.eng_email }}</td>
-      <td>{{ form.eng_comments }}</td>
-      <td>{{ form.confirmed }}</td>
-      <td>{{ form.close_date }}</td>
+      <td>{{ user.first_name }} {{ user.last_name }}</td>
+      <td>{{ user.email }}</td>
+      <td><input type="text" name="eng_comments"></td>
+      <td><input type="checkbox" name="confirmed"></td>
+      <td><input type="text" name="closed_date"></td>
     </tr>
   </table>
   <p><input type="submit" value="Update Ticket"  /></p>

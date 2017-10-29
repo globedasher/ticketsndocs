@@ -49,10 +49,7 @@ class DetailForm(ModelForm):
     # no other fields are selected. 
     class Meta:
         model = Ticket
-        fields = ['eng', 
-                  'eng_email', 
-                  'eng_comments',
-                  'confirmed',
+        fields = [ 'confirmed',
                   'close_date',
                   ]
         # The following section defines the widgets used for fields on the

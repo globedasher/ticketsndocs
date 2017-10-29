@@ -34,10 +34,10 @@
           <a href="{% url "tickets:form" ticket.id %}">{{ ticket.document_number }}</a>
         </td>
         <td>
-          <a href="{% url "tickets:form" ticket.id %}">{{ ticket.reported_by }}</a>
+          <a href="{% url "tickets:form" ticket.id %}">{{ ticket.reported_by.first_name }}</a>
         </td>
         <td> 
-          <a href="{% url "tickets:form" ticket.id %}">{{ ticket.reported_by_email }}</a>
+          <a href="{% url "tickets:form" ticket.id %}">{{ ticket.reported_by.email }}</a>
         </td>
       </tr>
     {% endfor %}

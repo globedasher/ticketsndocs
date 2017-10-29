@@ -48,28 +48,11 @@ def login_view(request):
         else:
             messages.error(request, "Login errors")
             return redirect(reverse('login:index'))
-
-
-
-
-        tuple_return = User.objects.login(request.POST['email'], 
-                request.POST['password'])
-        # tuple_return[0] is false if email didn't pass regex
-        if tuple_return[0] == False:
-            messages.error(request, "Login errors:")
-            # Here, tuple_retun[1] is a list of error messages to flash to user
-            for item in tuple_return[1]:
-                messages.error(request, item)
-            return redirect(reverse('login:index'))
-        # tuple_return[0] is false if email didn't pass regex
-        elif tuple_return[0] == True:
-            request.session['id'] = tuple_return[1].id
-            request.session['email'] = tuple_return[1].email
-            messages.success(request, "Successful login!")
-            return redirect(reverse('login:home'))
     else:
         messages.error(request, "Incorrect Http request.")
         return redirect(reverse('login:index'))
+
+
 
 def logout_view(request):
     #del request.session['id']
@@ -78,6 +61,7 @@ def logout_view(request):
     return redirect(reverse('login:index'))
 
 
+#TODO: I need to build registration validation of form data...
 def register(request):
     if request.method == 'POST':
         user = User.objects.create_user(
@@ -91,23 +75,6 @@ def register(request):
         login(request, user)
         messages.success(request, "Successful registration!")
         return redirect(reverse('login:home'))
-
-
-
-        tuple_return = User.objects.register(request.POST)
-        # tuple_return[0] is false if email didn't pass regex
-        if tuple_return[0] == False:
-            messages.error(request, "Registration errors:")
-            # Here, tuple_retun[1] is a list of error messages to flash to user
-            for item in tuple_return[1]:
-                messages.error(request, item)
-            return redirect(reverse('login:index'))
-        # tuple_return[0] is false if email didn't pass regex
-        elif tuple_return[0] == True:
-            request.session['id'] = tuple_return[1].id
-            request.session['email'] = tuple_return[1].email
-            messages.success(request, "Successful registration!")
-            return redirect(reverse('login:home'))
     else:
         messages.error(request, "Incorrect Http request.")
         return redirect(reverse('login:index'))

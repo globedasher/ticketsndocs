@@ -1,0 +1,73 @@
+<!doctype html >
+<html>
+<head>
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  background-color: #4c4c4c;
+}
+</style>
+<title> Tickets 'n Docs - Update and existing ticket </title>
+<!-- Load the CSS files for stylizing the page. -->
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" 
+    href="{% static 'tickets/style.css' %}" />
+</head>
+<body>
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<a href="{% url "tickets:index" %}">
+  <img src="{% static "tickets/logo.png" %}" alt="Cannot load logo." 
+      style="width:40px;height:60px;">
+</a>
+<h3>Ticket # {{ ticket.id }}</h3>
+  <table>
+    <tr>
+      <th>Published date:</th>
+      <th>Document number:</th>
+      <th>Revision:</th>
+      <th>Comments for revision:</th>
+      <th>Reported by:</th>
+      <th>Reported by email:</th>
+      <th>Issue URL:</th>
+      <th>Picture of issue:</th>
+    </tr>
+    <tr>
+      <td>{{ ticket.pub_date }}</td>
+      <td>{{ ticket.document_number }}</td>
+      <td>{{ ticket.revision }}</td>
+      <td>{{ ticket.comments_for_revision }}</td>
+      <td>{{ ticket.reported_by }}</td>
+      <td>{{ ticket.reported_by_email }}</td>
+      <td>{{ ticket.url_of_issue }}</td>
+      <!-- I want to display a picture loaded to the database here... -->
+      <td><img src="{{ ticket.pic_of_issue }}" alt="No image"
+        style="width:60px;height:60px;"></td>
+    </tr>
+  </table>
+<p>
+<form action="{% url "tickets:update" ticket.id %}" method="post">
+  {% csrf_token %}
+  <!-- TODO: add error checking that will raise and issue if the correct
+      input data is not provided in the form. -->
+  <table>
+    <tr>
+      <th>Engineer:</th>
+      <th>Engineer email:</th>
+      <th>Engineer comments:</th>
+      <th>Comments?</th>
+      <th>Closed date:</th>
+    </tr>
+    <tr>
+      <td>{{ form.eng }}</td>
+      <td>{{ form.eng_email }}</td>
+      <td>{{ form.eng_comments }}</td>
+      <td>{{ form.confirmed }}</td>
+      <td>{{ form.close_date }}</td>
+    </tr>
+  </table>
+  <p><input type="submit" value="Update Ticket"  /></p>
+</p>
+</form>
+</body>
+</html>

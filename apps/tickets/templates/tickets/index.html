@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+<title> Tickets 'n Docs </title>
+<!-- Load the CSS files for stylizing the page. -->
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'tickets/style.css' %}" />
+</head>
+<body>
+  <a href="{% url "tickets:index" %}">
+    <img src="{% static "tickets/logo.png" %}" alt="Cannot load logo." 
+      style="width:40px;height:60px;">
+  </a>
+  <h2> Welcome to Tickets 'n Docs </h2>
+  <p> This application will allow 
+  you to create tickets to fix issues. The system should be intuitive. </p>
+  <!-- The following will create a table with the open tickets of the system
+  listed for use. -->
+  <h3> Open Ticket List </h3>
+  <table class="center">
+    <tr>
+      <th>Ticket Number</th>
+      <th>Document Number</th>
+      <th>Reported by</th>
+      <th>Email</th>
+    </tr>
+  {% if open_ticket_list %}
+    {% for ticket in open_ticket_list %}
+      <tr>
+        <td> <a href="{% url "tickets:form" ticket.id %}">
+                {{ ticket.id }}</a></td>
+        <td> <a href="{% url "tickets:form" ticket.id %}">
+                {{ ticket.document_number }}</a></td>
+        <td> <a href="{% url "tickets:form" ticket.id %}">
+                {{ ticket.reported_by }}</a></td>
+        <td> <a href="{% url "tickets:form" ticket.id %}">
+                {{ ticket.reported_by_email }}</a></td>
+      </tr>
+    {% endfor %}
+  </table>
+  {% else %}
+  <tr>
+    <td> No open tickets exist. </td>
+    <td> Great work, team! </td>
+    <td> No open tickets exist. </td>
+    <td> Great work, team! </td>
+  </tr>
+  {% endif %}
+  <a href="{% url "tickets:newForm" %}"> Create new ticket</a>
+  <a href="{% url "tickets:closed" %}"> View closed tickets</a>
+</body>
+</html>

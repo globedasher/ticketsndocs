@@ -1,0 +1,78 @@
+<!doctype html >
+<html>
+<head>
+<style>
+table, th, td {
+  width: 25%;
+  border: 1px solid black;
+  border-collapse: collapse;
+  background-color: #4c4c4c;
+}
+</style>
+<!-- Load the CSS files for stylizing the page. -->
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" 
+    href="{% static 'tickets/style.css' %}" />
+</head>
+<body>
+<a href="{% url "tickets:index" %}">
+  <img src="{% static "tickets/logo.png" %}" alt="Cannot load logo." 
+      style="width:40px;height:60px;">
+</a>
+<h3> Create a New Ticket </h3>
+<form action="{% url "tickets:create_ticket" %}" method="post">
+  {% csrf_token %}
+  <p>
+  <table>
+    <tr>
+      <th>Published date:</th>
+      <th>Document number:</th>
+      <th>Revision:</th>
+      <th>Comments for revision:</th>
+    </tr>
+    <tr>
+      <td>{{ form.pub_date }}</td>
+      <td>{{ form.document_number }}</td>
+      <td>{{ form.revision }}</td>
+      <td>{{ form.comments_for_revision }}</td>
+    </tr>
+  </table>
+  </p>
+  <table>
+    <tr>
+      <th>Reported by:</th>
+      <th>Reported by email:</th>
+      <th>Issue URL:</th>
+      <th>Picture of issue:</th>
+    </tr>
+    <tr>
+      <td>{{ form.reported_by }}</td>
+      <td>{{ form.reported_by_email }}</td>
+      <td>{{ form.url_of_issue }}</td>
+      <td>{{ form.pic_of_issue }}</td>
+    </tr>
+  </table>
+
+<!-- Comment out old form format for test.
+  Published date:<br>
+  {{ form.pub_date }}<br>
+  Document number:<br>
+  {{ form.document_number }}<br>
+  Comments for revision:<br>
+  {{ form.comments_for_revision }}<br>
+  Reported by:<br>
+  {{ form.reported_by }}<br>
+  Reported by email:<br>
+  {{ form.reported_by_email }}<br>
+  Issue URL:<br>
+  {{ form.url_of_issue }}<br>
+  Picture of issue:<br>
+  {{ form.pic_of_issue }}<br>
+  Revision:<br>
+  {{ form.revision }}<br>
+-->
+
+  <p><input type="submit" value="Submit Ticket"  /></p>
+</form>
+</body>
+</html>

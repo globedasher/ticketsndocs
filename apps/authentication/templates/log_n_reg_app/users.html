@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Login and Registration</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'log_n_reg_app/css/main.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="{% static 'log_n_reg_app/js/main.js' %}"></script>
+  </head>
+  <body>
+    <div id="container">
+      <h4>User number: {{ request.user.id }} </h4>
+      <h4>User account: {{ request.user.email }}</h4>
+
+      {% for user in all_users %}
+      <p>
+        {{ user.id }}
+        {{ user.first_name }}
+        {{ user.last_name }}
+        {{ user.email }}
+      </p>
+      {% endfor %}
+
+    </div>
+    <ul>
+      <li><a href="admin/">Admin</a></li>
+      <li><a href={% url 'login:home' %}>Home</a></li>
+    </ul>
+  </body>
+</html>

@@ -23,16 +23,16 @@ table, th, td {
 <h4>Ticket Number {{ ticket.id }}</h4>
 <table>
   <tr>
-    <th>Created:</th>
-    <th>Document number:</th>
-    <th>Revision:</th>
-    <th>Comments for revision:</th>
-    <th>Reported by:</th>
-    <th>Reported by email:</th>
-    <th>Issue URL:</th>
-    <th>Closed date:</th>
-    <th>Confirmed?</th>
-    <th>Picture of issue:</th>
+    <th>Created</th>
+    <th>Document number</th>
+    <th>Revision</th>
+    <th>Comments for revision</th>
+    <th>Reported by</th>
+    <th>Reported by email</th>
+    <th>Issue URL</th>
+    <th>Closed date</th>
+    <th>Confirmed</th>
+    <th>Picture of issue</th>
   </tr>
   <tr>
     <td>{{ ticket.created_at }}</td>
@@ -44,16 +44,13 @@ table, th, td {
     <td>{{ ticket.url_of_issue }}</td>
     <td><input type="text" name="closed_date"></td>
     <td><input type="checkbox" name="confirmed"></td>
-    <td>Picture of issue:
-    <!-- I want to display a picture loaded to the database here... -->
-    <img src="{{ ticket.pic_of_issue }}" alt="No image"
-      style="width:60px;height:60px;"></td>
+    <td><img src="{{ ticket.pic_of_issue }}" alt="No image" style="width:60px;height:60px;"></td>
   </tr>
 </table>
 <h4>Previous notes about this ticket.</h4>
 <table>
   <tr>
-    <th>Reported By</th>
+    <th>User</th>
     <th>Comments</th>
     <th>Created</th>
   </tr>
@@ -72,9 +69,9 @@ table, th, td {
   <h4>Please add notes below</h4>
   <table>
     <tr>
-      <th>Engineer:</th>
-      <th>Engineer email:</th>
-      <th>Engineer comments:</th>
+      <th>Engineer</th>
+      <th>Engineer email</th>
+      <th>Engineer comments</th>
     </tr>
     <tr>
       <td>{{ user.first_name }} {{ user.last_name }}</td>

@@ -12,13 +12,13 @@ from django.utils import timezone
 
 
 class Ticket(models.Model):
-    
-    """ 
+
+    """
     This class builds a ticket for documentation update or a new document.
     The ticket will be assigned to an agent of the team to complete. Once the
     ticket has been addressed by the writer, an editor will be assigned to
     review the documentation. The editor will markup changes and pass it back
-    to the writer until they agree it can be released.  
+    to the writer until they agree it can be released.
     """
     # TODO: Improve Ticet model to reflect more functions for support teams.
     pub_date = models.DateField(max_length=100, default=timezone.now)
@@ -38,7 +38,7 @@ class Ticket(models.Model):
     close_date = models.DateField(max_length=100, null=True, blank=True)
 
     def __str__(self):
-        """ 
+        """
         When requested, return the document_number.
         """
         return self.document_number

@@ -58,6 +58,7 @@ def create_ticket(request):
     # accept post data from the blank form.
     # If a POST reqest, we need to process the form data
     if request.method == 'POST':
+        print(request.POST['pic_of_issue'])
         # Create a new form instance and populate it with data from the user
         # input.
         form = NewForm(request.POST)
@@ -67,21 +68,21 @@ def create_ticket(request):
             # save it to the database. In this instance, the cleaned_data is a
             # dictionary from the form object. Each key presents the data
             # obtained from the form.
-            tick = Ticket(pub_date = 
-                                form.cleaned_data['pub_date'], 
-                          document_number = 
+            tick = Ticket(pub_date =
+                                form.cleaned_data['pub_date'],
+                          document_number =
                                 form.cleaned_data['document_number'],
-                          comments_for_revision = 
+                          comments_for_revision =
                                 form.cleaned_data['comments_for_revision'],
-                          reported_by = 
-                                form.cleaned_data['reported_by'], 
-                          reported_by_email = 
+                          reported_by =
+                                form.cleaned_data['reported_by'],
+                          reported_by_email =
                                 form.cleaned_data['reported_by_email'],
-                          url_of_issue = 
+                          url_of_issue =
                                 form.cleaned_data['url_of_issue'],
-                          pic_of_issue = 
+                          pic_of_issue =
                                 form.cleaned_data['pic_of_issue'],
-                          revision = 
+                          revision =
                                 form.cleaned_data['revision'],
                           )
             tick.save()

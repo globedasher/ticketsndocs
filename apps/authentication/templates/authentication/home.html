@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Login and Registration</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'authentication/css/main.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="{% static 'authentication/js/main.js' %}"></script>
+  </head>
+  <body>
+    <div id="container">
+      <h4>Hello, {{ request.user.email }}.</h4>
+      <div id="messages">
+        {% if messages %}
+        <ul class="messages">
+          {% for message in messages %}
+          {% if message.tags %}
+          <li class="{{ message.tags }}">{{ message }}</li>
+          {% endif %}
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+      <div class="input_box">
+        <table>
+          <tr>
+            <th>Navigate To</th>
+          </tr>
+          <tr>
+            <td><a href={% url 'tickets:index' %}>Tickets</a></td>
+          </tr>
+          <tr>
+            <td><a href={% url 'login:users' %}>Users</a></td>
+          </tr>
+          <tr>
+            <td><a href={% url 'login:logout' %}>Logout</a></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

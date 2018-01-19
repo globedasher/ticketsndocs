@@ -23,6 +23,7 @@ def home(request):
     return render(request, "authentication/home.html")
 
 def users(request):
+    print(request)
     if not request.user.is_authenticated:
         messages.error(request, "Please login first.")
         return redirect(reverse('login:index'))
@@ -30,7 +31,7 @@ def users(request):
     context = { 'all_users': all_users }
     return render(request, "authentication/users.html", context)
 
-""" 
+"""
 The tuple_return in the login and register functions return a true if the email
 is cleared by regex match and and User object. If the email is not cleared by
 regex, the tuple comes back as false at [0] and an error message at [1].

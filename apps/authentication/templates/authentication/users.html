@@ -24,7 +24,9 @@
 
     </div>
     <ul>
+      {% if user.is_superuser %}
       <li><a href="admin/">Admin</a></li>
+      {% endif %}
       <li><a href={% url 'login:home' %}>Home</a></li>
     </ul>
   </body>

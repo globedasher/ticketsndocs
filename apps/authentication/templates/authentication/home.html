@@ -10,7 +10,9 @@
   </head>
   <body>
     <div id="container">
+
       <h4>Hello, {{ request.user.email }}.</h4>
+
       <div id="messages">
         {% if messages %}
         <ul class="messages">
@@ -22,6 +24,7 @@
         </ul>
         {% endif %}
       </div>
+
       <div class="input_box">
         <table>
           <tr>
@@ -31,6 +34,9 @@
             <td><a href={% url 'tickets:index' %}>Tickets</a></td>
           </tr>
           <tr>
+            <td><a href={% url 'docs:index' %}>Documents</a></td>
+          </tr>
+          <tr>
             <td><a href={% url 'login:users' %}>Users</a></td>
           </tr>
           <tr>
@@ -38,6 +44,7 @@
           </tr>
         </table>
       </div>
+
     </div>
   </body>
 </html>

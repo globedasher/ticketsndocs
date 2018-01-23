@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Tickets 'n Docs: Document Upload</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'docs/style.css' %}">
+  </head>
+  <body>
+    <div id="container">
+      <h1>Upload Documents</h1>
+
+      <div id="messages">
+        {% if messages %}
+        <ul class="messages">
+          {% for message in messages %}
+          {% if message.tags %}
+          <li class="{{ message.tags }}">{{ message }}</li>
+          {% endif %}
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+      
+      <div>
+        <form action={% url 'docs:upload' %} name="upload" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <table>
+            <tr>
+              <th>Please choose your file.</th>
+            </tr>
+            <tr>
+              <td><input type="file" name="payload"/><br></td>
+            </tr>
+            <tr>
+              <td><input type="submit" value="Upload File"></td>
+            </tr>
+          </table>
+        </form>
+        <a href={% url 'docs:index' %}>Index</a>
+      </div>
+    </div>
+  </body>
+</html>

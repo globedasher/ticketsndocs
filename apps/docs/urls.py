@@ -13,13 +13,10 @@ from . import views
 
 # The following app_name provides a name to reference in the namespace...
 # or something. I'm still learning Django.
-app_name = "tickets"
+app_name = "docs"
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url(r'closed/$', views.ClosedTicketIndex.as_view(), name='closed'),
-    url(r'newForm/$', views.create_ticket, name='newForm'),
-    url(r'create_ticket/', views.create_ticket, name='create_ticket'),
-    url(r'^(?P<pk>[0-9]+)/form/$', views.open_ticket, name='form'),
-    url(r'^(?P<pk>[0-9]+)/update/$', views.open_ticket, name='update'),
-    url(r'thanks/$', views.thanks, name='thanks'),
+    url(r'upload_center/$', views.upload_center, name='upload_center'),
+    url(r'upload/$', views.upload, name='upload'),
+    url(r'records/$', views.records, name='records'),
 ]

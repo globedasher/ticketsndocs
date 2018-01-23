@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Tickets 'n Docs: Documents</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'docs/style.css' %}">
+  </head>
+  <body>
+    <div id="container">
+      <h1>All Documents</h1>
+
+      <div id="messages">
+        {% if messages %}
+        <ul class="messages">
+          {% for message in messages %}
+          {% if message.tags %}
+          <li class="{{ message.tags }}">{{ message }}</li>
+          {% endif %}
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+
+      <div>
+        <table>
+          <tr>
+            <th>File</th>
+            <th>User</th>
+            <th>Updated</th>
+            <th>Created</th>
+          </tr>
+          {% for item in documents %}
+          <tr>
+            <td><a href="{{item.path}}">{{ item.path }}</a></td>
+            <td>{{ item.uploaded_by }}</td>
+            <td>{{ item.updated_at }}</td>
+            <td>{{ item.created_at }}</td>
+          </tr>
+          {% endfor %}
+        </table>
+        {% if not documents %}
+        <p>No Documents.</p>
+        {% endif %}
+        <ul>
+          <li><a href={% url 'docs:index' %}>Docs Index<a></li>
+          <li><a href={% url 'login:home' %}>Home<a></li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,93 @@
+/* This file is the first CSS file Richard Morley created for this application
+   and it will carry the styling for the entire Tickets 'n Docs application.
+ */
+
+
+/* This section defines the text color, background color, and font used on the
+ * application.
+ */
+
+body {
+  text-align: center;
+  background-color: grey;
+  font-family: Impact, Charcoal, sans-serif;
+  font-family: Tahoma, Geneva, sans-serif;
+}
+
+h1 {
+  text-align: center;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li a {
+  color: black;
+}
+
+/* Choose the color of hyperlinks. */
+a {
+  color: black;
+}
+
+/* Align the table with the center of the web browser. */
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Color the table headders a specific color. */
+th {
+  background-color: blue;
+  color: black;
+}
+
+/* Color every other row of the tickets table a different color. */
+tr:nth-child(odd) {
+  background-color: #9595db;
+}
+
+/* Change the background color of a table row based on mouse hover. */
+tr:hover {
+  background-color: #7c7676;
+}
+
+
+/* Table line designs. */
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+/* The following line will style the table itself. I am attempting to make 
+ * all columns of the table carry the same dimensions.
+ */
+table {
+  width: 50%;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+th, td {
+  padding: 5px;
+}
+
+th {
+  text-align: center;
+}
+
+input {
+  color: black;
+}
+
+select {
+  color: black;
+}
+
+textarea {
+  color: black;
+}

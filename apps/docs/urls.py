@@ -7,7 +7,7 @@ Function views
     1. Add an import:  from my_app import views
     2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
 """
-from django.conf.urls import url, include
+from django.urls import include, path
 
 from . import views
 
@@ -15,8 +15,9 @@ from . import views
 # or something. I'm still learning Django.
 app_name = "docs"
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
-    url(r'upload_center/$', views.upload_center, name='upload_center'),
-    url(r'upload/$', views.upload, name='upload'),
-    url(r'records/$', views.records, name='records'),
+    path(r'', views.index, name='index'),
+    path(r'upload_center/', views.upload_center, name='upload_center'),
+    path(r'upload/', views.upload, name='upload'),
+    path(r'records/', views.records, name='records'),
+    path(r'details/<int:item_id>', views.details, name='details'),
 ]

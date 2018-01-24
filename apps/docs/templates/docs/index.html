@@ -22,31 +22,38 @@
         {% endif %}
       </div>
 
+      <div id="navbar">
+        <div class="left">
+          <ul>
+            <li><a href={% url 'docs:upload_center' %}>Upload Center</a></li>
+            <li><a href={% url 'docs:records' %}>View All</a></li>
+            <li><a href={% url 'login:home' %}>Home</a></li>
+          </ul>
+        </div>
+        <div class="right">
+          <h6>{{ request.user.email }}</h6>
+          <h3>{% now "Y.m.d" %}</h3>
+        </div>
+      </div>
+
       <div>
-        <a href={% url 'docs:upload_center' %}>Upload Center<a>
         <table>
           <tr>
             <th>File</th>
             <th>User</th>
             <th>Updated</th>
-            <th>Created</th>
           </tr>
           {% for item in documents %}
           <tr>
-            <td><a href="{{item.path}}">{{ item.path }}</a></td>
+            <td><a href={% url 'docs:details' item.id %}>{{ item.path }}</a></td>
             <td>{{ item.uploaded_by }}</td>
-            <td>{{ item.updated_at }}</td>
-            <td>{{ item.created_at }}</td>
+            <td>{{ item.updated_at | date:"Y/m/d" }}</td>
           </tr>
           {% endfor %}
         </table>
         {% if not documents %}
         <p>No Documents.</p>
         {% endif %}
-        <ul>
-          <li><a href={% url 'docs:records' %}>View All<a></li>
-          <li><a href={% url 'login:home' %}>Home<a></li>
-        </ul>
       </div>
     </div>
   </body>

@@ -91,3 +91,44 @@ select {
 textarea {
   color: black;
 }
+
+  #navbar {
+  }
+  
+  #navbar h3 {
+    display: inline;
+  }
+
+  #navbar h6 {
+    display: inline;
+  }
+
+  #navbar ul{
+    display: inline;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  #navbar li {
+    display: inline;
+    margin: 10px;
+  }
+
+  #navbar .left {
+    display: inline;
+    position: relative;
+    left: 0px;
+  }
+
+  #navbar .right {
+    display: inline;
+    position: relative;
+    right: 0px;
+  }
+
+  #container {
+    margin: 0 auto;
+    width: 95%;
+  }
+

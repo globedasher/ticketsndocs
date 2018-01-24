@@ -9,18 +9,30 @@
   <body>
     <div id="container">
       <h1>Documents Available</h1>
+
+      <div id="navbar">
+        <ul>
+          <li><a href={% url 'docs:index' %}>My Files</a></li>
+          <li><a href={% url 'docs:records' %}>All Files</a></li>
+        </ul>
+        <h6>{{ request.user.email }}</h6>
+        <h3>{% now "Y.m.d" %}</h3>
+      </div>
+
       <table>
-        {% for item in documents %}
         <tr>
-          <td>{{ item.path }}</td>
-          <td>{{ item.uploaded_by }}</td>
+          <th>Path</th>
+          <th>User</th>
+          <th>Last Update</th>
+          <th>First Uplodad</th>
         </tr>
-        {% endfor %}
+        <tr>
+          <td><a href="{{ document.path }}">{{ document.path }}</td>
+          <td>{{ document.uploaded_by }}</td>
+          <td>{{ document.updated_at | date:"Y/m/d H:i" }}</td>
+          <td>{{ document.created_at | date:"Y/m/d H:i" }}</td>
+        </tr>
       </table>
-      {% if not documents %}
-      <p>No Documents.</p>
-      {% endif %}
-      <a href={% url 'docs:upload_center' %}>Upload Center<a>
     </div>
   </body>
 </html>
